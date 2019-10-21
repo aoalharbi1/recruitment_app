@@ -14,6 +14,6 @@ app.use(session({
 }));
 
 require('./server/config/mongoose.js');
-// require('./server/config/routes.js')(app)
+require('./server/config/routes.js')(app)
 
 app.listen(8000, () => console.log("listening on port 8000"));

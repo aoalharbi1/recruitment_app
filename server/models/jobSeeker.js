@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const JobSchema = require('./job').schema;
+var DateOnly = require('mongoose-dateonly')(mongoose);
 
 const JobSeekerSchema = new mongoose.Schema(
     {
@@ -9,7 +10,7 @@ const JobSeekerSchema = new mongoose.Schema(
         password: { type: String, required: true },
         jobs: [JobSchema],
         info: {
-            dateOfBirth: { type: Date, required: true },
+            dateOfBirth: { type: DateOnly, required: true },
             gender: { type: String, required: true },
             phone: { type: String, required: true },
             city: { type: String, required: true },
