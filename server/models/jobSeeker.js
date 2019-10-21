@@ -20,9 +20,7 @@ const JobSeekerSchema = new mongoose.Schema(
             link: { type: String, required: true },
         },
         user_status: {
-            job: {
-                id: { type: String, required: true }, status: { type: String, default: "applied" }
-            }
+            user_id: { type: String, required: true }, status: { type: String, default: "applied" }
         },
     },
     { timestamps: true }
