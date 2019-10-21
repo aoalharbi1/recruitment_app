@@ -21,7 +21,7 @@ const JobSeekerSchema = new mongoose.Schema(
         },
         user_status: {
             job: {
-                status: { type: String, default: "applied" }
+                id: { type: String, required: true }, status: { type: String, default: "applied" }
             }
         },
     },
