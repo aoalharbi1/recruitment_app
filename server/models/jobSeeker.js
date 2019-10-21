@@ -1,24 +1,24 @@
 const mongoose = require('mongoose');
 
-const JopSeekerSchema = new mongoose.Schema({
+const JobSeekerSchema = new mongoose.Schema({
     first_name: { type: String, required: true },
     last_name: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
-    jops: [Jobs],
+    jobs: [Jobs],
     info: {
         dateOfbirth: { type: Date, required: true },
         gender: { type: String, required: true },
-        phone: { tybe: String, required: true },
-        city: { tybe: String, required: true },
-        gpa: { tybe: String, required: true },
-        university: { tybe: String, required: true },
-        major: { tybe: String, required: true },
-        education: { tybe: String, required: true },
-        link: { tybe: String, required: true },
+        phone: { type: String, required: true },
+        city: { type: String, required: true },
+        gpa: { type: String, required: true },
+        university: { type: String, required: true },
+        major: { type: String, required: true },
+        education: { type: String, required: true },
+        link: { type: String, required: true },
     },
     status: {},
 },
     { timestamps: true }
 );
-mongoose.model('JopSeeker', JopSeekerSchema);
+mongoose.model('JobSeeker', JobSeekerSchema);
