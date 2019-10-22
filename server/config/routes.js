@@ -1,9 +1,11 @@
 const jobs = require('../controllers/jobs.js');
 const jobSeekers = require('../controllers/jobSeekers');
+const recruiters = require('../controllers/recruiters');
 
 module.exports = function (app) {
+    // *********************** Job routes ***********************
     app.get('/jobs', (req, res) => {
-        jobs.index(req, res);
+        jobs.getAll(req, res);
     });
 
     app.get('/job', (req, res) => {
@@ -26,7 +28,27 @@ module.exports = function (app) {
         jobs.userApplied(req, res);
     });
 
-    // user routes 
+    // *********************** Recruiter routes ***********************
+    app.get('/recruiters', (req, res) => {
+        recruiters.getAll(req, res);
+    });
+    app.get('/recruiter', (req, res) => {        
+        recruiters.getById(req, res);
+    });
+
+    app.post('/recruiter', (req, res) => {
+        recruiters.create(req, res);
+    });
+
+    app.put('/recruiter', (req, res) => {
+        recruiters.update(req, res);
+    });
+
+    app.delete('/recruiter', (req, res) => {
+        recruiters.remove(req, res);
+    });
+
+    // *********************** user routes ***********************
     app.get('/users', (req, res) => {
         jobSeekers.getAll(req, res);
     });
