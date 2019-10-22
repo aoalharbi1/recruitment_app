@@ -48,6 +48,10 @@ module.exports = function (app) {
         recruiters.remove(req, res);
     });
 
+    app.post("/login_rec", (req, res) => {
+        recruiters.login(req, res);
+    });
+
     // *********************** user routes ***********************
     app.get('/users', (req, res) => {
         jobSeekers.getAll(req, res);
@@ -77,9 +81,4 @@ module.exports = function (app) {
     app.post('/login', (req, res) => {
         jobSeekers.login(req, res);
     });
-
-    // *********************** recruiters routes ***********************
-    app.post("/login_rec", (req, res) => {
-        recruiters.login(req, res);
-    })
 }
