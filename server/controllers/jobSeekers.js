@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const JobSeeker = mongoose.model('JobSeeker');
 const bcrypt = require('bcrypt');
+const Job = mongoose.model('Job');
 
 module.exports = {
     getAll: (req, res) => {
@@ -65,7 +66,7 @@ module.exports = {
             })
             .catch(err => res.json(err));
     },
-    
+ 
     login: (req, res) => {
         bcrypt.hash(req.body.password, 10)
             .then(result => {
@@ -87,4 +88,11 @@ module.exports = {
             })
             .catch(err => res.json(err))
     }
+
+    //  this sign - before filed name will remove the field when the user looking throw the jobs
+    displayJobs: (req, res) => {
+        Job.find({}, '-applied_users')
+            .then(jobs => res.json(jobs))
+            .catch(err => res.json(err));
+    },
 }

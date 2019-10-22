@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Recruiter = mongoose.model('Recruiter');
 const bcrypt = require('bcrypt');
+const Job = mongoose.model('Job');
 
 
 module.exports = {
@@ -69,5 +70,13 @@ module.exports = {
             res.json(req.session.user);
         })
         .catch(err => res.json(err))
+
+    // this function the recruiter can see all jobs posted by him 
+    // this simple ~ to get only the field written after ~ 
+    displayJobs: (req, res) => {
+        Recruiter.find({_id: req.query._id}, '~ jobs ')
+            .then(data => res.json(data))
+            .catch(err => res.json(err))
     }
+
 }

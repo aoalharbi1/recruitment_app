@@ -47,6 +47,11 @@ module.exports = function (app) {
     app.delete('/recruiter', (req, res) => {
         recruiters.remove(req, res);
     });
+    // the testing route will be something like this:
+    // 127.0.0.1:8000/recruiter/jobs/?_id=5daf17d53d379b26336928c8
+    app.get('/recruiter/jobs', (req ,res) =>{
+        recruiters.displayJobs(req,res);
+    });
 
     app.post("/login_rec", (req, res) => {
         recruiters.login(req, res);
@@ -81,4 +86,10 @@ module.exports = function (app) {
     app.post('/login', (req, res) => {
         jobSeekers.login(req, res);
     });
+
+    // view the jobs from the jobSeeker
+    app.get('/user/jobs' , (req,res)=>{
+        jobSeekers.displayJobs(req , res);
+    });
+
 }
