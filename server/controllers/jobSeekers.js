@@ -50,7 +50,7 @@ module.exports = {
         .catch(err => res.json(err));
     },
     
-    //ali
+    //user applied for a job
      AppliedForJob: (req, res) => {
         if (!req.session.jobSeeker)
             res.json("User not signed in");

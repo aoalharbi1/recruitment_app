@@ -69,7 +69,7 @@ module.exports = function (app) {
         jobSeekers.remove(req, res);
     });
 
-    //ali
+    //user applied for a job
     app.post('/user/applied', (req, res) => {
         jobSeekers.AppliedForJob(req, res);
     });
