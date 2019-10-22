@@ -31,7 +31,7 @@ module.exports = function (app) {
         jobSeekers.getAll(req, res);
     });
 
-    app.get('/user', (req, res) => {
+    app.get('/user', (req, res) => {        
         jobSeekers.getById(req, res);
     });
 
