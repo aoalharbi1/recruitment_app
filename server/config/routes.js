@@ -47,6 +47,11 @@ module.exports = function (app) {
     app.delete('/recruiter', (req, res) => {
         recruiters.remove(req, res);
     });
+    // the testing route will be something like this:
+    // 127.0.0.1:8000/recruiter/jobs/?_id=5daf17d53d379b26336928c8
+    app.get('/recruiter/jobs', (req ,res) =>{
+        recruiters.displayJobs(req,res);
+    });
 
     // *********************** user routes ***********************
     app.get('/users', (req, res) => {
