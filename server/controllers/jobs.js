@@ -25,8 +25,6 @@ module.exports = {
     update: (req, res) => {
         Job.findOne({ _id: req.body._id })
             .then(job => {
-                console.log(req.body);
-
                 job.title = req.body.title;
                 job.level = req.body.level;
                 job.field = req.body.field;
