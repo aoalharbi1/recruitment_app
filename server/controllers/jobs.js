@@ -3,7 +3,7 @@ const Job = mongoose.model('Job');
 const JobSeeker = mongoose.model('JobSeeker');
 
 module.exports = {
-    index: (req, res) => {
+    getAll: (req, res) => {
         Job.find()
             .then(jobs => res.json(jobs))
             .catch(err => res.json(err));
@@ -32,6 +32,7 @@ module.exports = {
                 job.type = req.body.type;
                 job.company = req.body.company;
                 job.description = req.body.description;
+
                 return job.save();
             })
             .then(result => res.json(result))
