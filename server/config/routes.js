@@ -47,4 +47,9 @@ module.exports = function (app) {
         jobSeekers.remove(req, res);
     });
 
+    //ali
+    app.post('/user/applied', (req, res) => {
+        jobSeekers.AppliedForJob(req, res);
+    });
+
 }
