@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Recruiter = mongoose.model('Recruiter');
+const bcrypt = require('bcrypt');
 const Job = mongoose.model('Job');
 
 
@@ -46,6 +47,29 @@ module.exports = {
         .catch(err => res.json(err));
     },
 
+    login: (req, res) => {
+        bcrypt.hash(req.body.password, 10)
+        .then(result => {
+            console.log(result);
+        })
+        .catch(err => res.json(err));
+    Recruiter.findOne({ email: req.body.email, first_name: req.body.first_name })
+        .then(data => {
+            if (data == null)
+                res.json("User not found!")
+            req.session.user = {
+                _id: data._id,
+                first_name: data.first_name,
+                last_name: data.last_name,
+                email: data.email,
+                website: data.website,
+                companyName: data.companyName,
+                jobs: data.jobs
+            }
+            console.log(data);
+            res.json(req.session.user);
+        })
+        .catch(err => res.json(err))
 
     // this function the recruiter can see all jobs posted by him 
     // this simple ~ to get only the field written after ~ 
