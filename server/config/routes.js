@@ -32,7 +32,7 @@ module.exports = function (app) {
     app.get('/recruiters', (req, res) => {
         recruiters.getAll(req, res);
     });
-    app.get('/recruiter', (req, res) => {        
+    app.get('/recruiter', (req, res) => {
         recruiters.getById(req, res);
     });
 
@@ -53,7 +53,7 @@ module.exports = function (app) {
         jobSeekers.getAll(req, res);
     });
 
-    app.get('/user', (req, res) => {        
+    app.get('/user', (req, res) => {
         jobSeekers.getById(req, res);
     });
 
@@ -74,4 +74,12 @@ module.exports = function (app) {
         jobSeekers.AppliedForJob(req, res);
     });
 
+    app.post('/login', (req, res) => {
+        jobSeekers.login(req, res);
+    });
+
+    // *********************** recruiters routes ***********************
+    app.post("/login_rec", (req, res) => {
+        recruiters.login(req, res);
+    })
 }
