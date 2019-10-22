@@ -74,4 +74,9 @@ module.exports = function (app) {
         jobSeekers.AppliedForJob(req, res);
     });
 
+    // view the jobs from the jobSeeker
+    app.get('/user/jobs' , (req,res)=>{
+        jobSeekers.displayJobs(req , res);
+    });
+
 }
