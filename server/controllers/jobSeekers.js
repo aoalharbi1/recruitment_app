@@ -66,7 +66,7 @@ module.exports = {
             })
             .catch(err => res.json(err));
     },
- 
+
     login: (req, res) => {
         bcrypt.hash(req.body.password, 10)
             .then(result => {
@@ -87,7 +87,7 @@ module.exports = {
                 res.json(req.session.user);
             })
             .catch(err => res.json(err))
-    }
+    },
 
     //  this sign - before filed name will remove the field when the user looking throw the jobs
     displayJobs: (req, res) => {
