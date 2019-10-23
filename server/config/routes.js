@@ -53,7 +53,7 @@ module.exports = function (app) {
         recruiters.displayJobs(req,res);
     });
 
-    app.post("/login_rec", (req, res) => {
+    app.post('/recruiter/login', (req, res) => {
         recruiters.login(req, res);
     });
 
@@ -83,7 +83,7 @@ module.exports = function (app) {
         jobSeekers.AppliedForJob(req, res);
     });
 
-    app.post('/login', (req, res) => {
+    app.post('/user/login', (req, res) => {
         jobSeekers.login(req, res);
     });
 

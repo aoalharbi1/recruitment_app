@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Recruiter = mongoose.model('Recruiter');
 const bcrypt = require('bcrypt');
-const Job = mongoose.model('Job');
+const passwordValidator = require('password-validator');
 
 
 module.exports = {
@@ -19,8 +19,35 @@ module.exports = {
 
     create: (req, res) => {
         const recruiter = req.body;
-        Recruiter.create(recruiter)
-            .then(result => res.json(result))
+        const schema = new passwordValidator();
+        schema
+            .is().min(8)
+            .is().max(30)
+            .has().uppercase()
+            .has().lowercase()
+            .has().digits()
+            .has().symbols()
+            .has(/[!@#$%&*]/g)
+            .has().not().spaces();
+
+        Recruiter.find({ email: recruiter.email })
+            .then(result => {
+                if (result.length > 0) {
+                    return Promise.reject("Error: the email is already registered");
+                }
+                if (recruiter.password === undefined || schema.validate(recruiter.password) === false) {
+                    return Promise.reject("Error: Enter a valid password");
+                }
+                let newRecruiter = recruiter
+                return bcrypt.hash(newRecruiter.password, 10)
+            })
+            .then(hashedPassword => {
+                let newRecruiter = recruiter;
+                newRecruiter.password = hashedPassword;
+
+                return Recruiter.create(newRecruiter);
+            })
+            .then(savedResult => res.json(savedResult))
             .catch(err => res.json(err));
     },
 
@@ -48,28 +75,31 @@ module.exports = {
     },
 
     login: (req, res) => {
-        bcrypt.hash(req.body.password, 10)
-            .then(result => {
-                console.log(result);
+        Recruiter.findOne({ email: req.body.email })
+            .then(async recruiter => {
+                if (recruiter === null) {
+                    return res.json("User not found!");
+                }
+                try {
+                    if (req.body.password && await bcrypt.compare(req.body.password, recruiter.password)) {
+                        req.session.recruiter = {
+                            _id: recruiter._id,
+                            first_name: recruiter.first_name,
+                            last_name: recruiter.last_name,
+                            email: recruiter.email,
+                            website: recruiter.website,
+                            companyName: recruiter.companyName,
+                            jobs: recruiter.jobs
+                        }
+                        return res.json(req.session.recruiter);
+                    }
+                    return Promise.reject("Error: password is incorrect")
+                }
+                catch (err) {
+                    return Promise.reject(err)
+                }
             })
             .catch(err => res.json(err));
-        Recruiter.findOne({ email: req.body.email, first_name: req.body.first_name })
-            .then(data => {
-                if (data == null)
-                    res.json("User not found!")
-                req.session.user = {
-                    _id: data._id,
-                    first_name: data.first_name,
-                    last_name: data.last_name,
-                    email: data.email,
-                    website: data.website,
-                    companyName: data.companyName,
-                    jobs: data.jobs
-                }
-                console.log(data);
-                res.json(req.session.user);
-            })
-            .catch(err => res.json(err))
 
         // this function the recruiter can see all jobs posted by him 
         // this simple ~ to get only the field written after ~ 

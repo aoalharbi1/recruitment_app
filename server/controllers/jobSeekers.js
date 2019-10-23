@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const JobSeeker = mongoose.model('JobSeeker');
 const bcrypt = require('bcrypt');
 const Job = mongoose.model('Job');
+const passwordValidator = require('password-validator');
 
 module.exports = {
     getAll: (req, res) => {
@@ -18,8 +19,35 @@ module.exports = {
 
     create: (req, res) => {
         const user = req.body;
-        JobSeeker.create(user)
-            .then(result => res.json(result))
+        const schema = new passwordValidator();
+        schema
+            .is().min(8)
+            .is().max(30)
+            .has().uppercase()
+            .has().lowercase()
+            .has().digits()
+            .has().symbols()
+            .has(/[!@#$%&*]/g)
+            .has().not().spaces();
+
+        JobSeeker.find({ email: user.email })
+            .then(result => {
+                if (result.length > 0) {
+                    return Promise.reject("Error: the email is already registered");
+                }
+                if (user.password === undefined || schema.validate(user.password) === false) {
+                    return Promise.reject("Error: Enter a valid password");
+                }
+                let newUser = user
+                return bcrypt.hash(newUser.password, 10);
+            })
+            .then(hashedPassword => {
+                let newUser = user;
+                newUser.password = hashedPassword;
+
+                return JobSeeker.create(newUser);
+            })
+            .then(savedResult => res.json(savedResult))
             .catch(err => res.json(err));
     },
 
@@ -58,8 +86,8 @@ module.exports = {
             res.json("User not signed in");
 
         const job = req.body;
-        const jobSeekerID = req.session._id;
-        Job.findOneAndUpdate({ _id: jobSeekerID }, { $push: { jobs: job } })
+        const jobSeeker = req.session.jobSeeker;
+        Job.findOneAndUpdate({ _id: jobSeeker._id }, { $push: { jobs: job } })
 
             .then(result => {
                 res.json(result);
@@ -68,25 +96,30 @@ module.exports = {
     },
 
     login: (req, res) => {
-        bcrypt.hash(req.body.password, 10)
-            .then(result => {
-                console.log(result);
+        JobSeeker.findOne({ email: req.body.email })
+            .then(async jobSeeker => {
+                if (jobSeeker === null) {
+                    return res.json("User not found!");
+                }
+                try {
+                    if (req.body.password && await bcrypt.compare(req.body.password, jobSeeker.password)) {
+                        req.session.jobSeeker = {
+                            _id: jobSeeker._id,
+                            first_name: jobSeeker.first_name,
+                            last_name: jobSeeker.last_name,
+                            email: jobSeeker.email,
+                            info: jobSeeker.info
+                        }
+
+                        return res.json(req.session.jobSeeker);
+                    }
+                    return Promise.reject("Error: password is incorrect")
+                }
+                catch (err) {
+                    return Promise.reject(err)
+                }
             })
             .catch(err => res.json(err));
-        JobSeeker.findOne({ email: req.body.email, first_name: req.body.first_name })
-            .then(data => {
-                if (data == null)
-                    res.json("User not found!")
-                req.session.user = {
-                    _id: data._id,
-                    first_name: data.first_name,
-                    last_name: data.last_name,
-                    email: data.email,
-                    info: data.info,
-                }
-                res.json(req.session.user);
-            })
-            .catch(err => res.json(err))
     },
 
     //  this sign - before filed name will remove the field when the user looking throw the jobs
