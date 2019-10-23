@@ -1,6 +1,7 @@
 const jobs = require('../controllers/jobs.js');
 const jobSeekers = require('../controllers/jobSeekers');
 const recruiters = require('../controllers/recruiters');
+const admin = require('../controllers/admins');
 
 module.exports = function (app) {
     // *********************** Job routes ***********************
@@ -57,7 +58,7 @@ module.exports = function (app) {
         recruiters.login(req, res);
     });
 
-    // *********************** user routes ***********************
+    // *********************** JobSeeker routes ***********************
     app.get('/users', (req, res) => {
         jobSeekers.getAll(req, res);
     });
@@ -90,6 +91,19 @@ module.exports = function (app) {
     // view the jobs from the jobSeeker
     app.get('/user/jobs' , (req,res)=>{
         jobSeekers.displayJobs(req , res);
+    });
+
+    // *********************** Admin routes ***********************
+    app.get('/admin/recruiters', (req, res) => {
+        admin.getAll(req, res);
+    });
+
+    app.put('/admin/activate', (req, res) => {
+        admin.activateOrDeactivate(req, res);
+    });
+
+    app.post('/admin/login', (req, res) => {
+        admin.login(req, res);
     });
 
 }

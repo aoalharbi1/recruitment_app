@@ -87,11 +87,8 @@ module.exports = {
 
         const job = req.body;
         const jobSeeker = req.session.jobSeeker;
-        Job.findOneAndUpdate({ _id: jobSeeker._id }, { $push: { jobs: job } })
-
-            .then(result => {
-                res.json(result);
-            })
+        Job.findOneAndUpdate({ _id: jobSeeker._id }, { $push: { jobs: job } }, { new: true })
+            .then(result => res.json(result))
             .catch(err => res.json(err));
     },
 
