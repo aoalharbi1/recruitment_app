@@ -100,7 +100,7 @@ module.exports = {
                 }
             })
             .catch(err => res.json(err));
-
+        },
         // this function the recruiter can see all jobs posted by him 
         // this simple ~ to get only the field written after ~ 
         displayJobs: (req, res) => {
@@ -109,4 +109,3 @@ module.exports = {
                 .catch(err => res.json(err))
         }
     }
-}
