@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Recruiter = mongoose.model('Recruiter');
+const bcrypt = require('bcrypt');
 
 module.exports = {
     getAll: (req, res) => {
