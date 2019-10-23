@@ -25,15 +25,15 @@
             </div>
             <ul class="navbar-nav ml-lg-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/jobseeker"><i class="material-icons">search</i>Discover <span
+                    <a class="nav-link" [routerLink]="['jobseeker']"><i class="material-icons">search</i>Discover <span
                             class="sr-only">(current)</span></a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/register" ><i class="material-icons">person_outline</i>Register</a>
+                    <a class="nav-link" [routerLink]="['register']" ><i class="material-icons">person_outline</i>Register</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/login" ><i class="material-icons">person</i>Login</a>
+                    <a class="nav-link" [routerLink]="['login']" ><i class="material-icons">person</i>Login</a>
                 </li>
 
                 <li class="nav-item dropdown" *ngIf="is_login">
