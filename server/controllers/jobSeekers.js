@@ -137,9 +137,8 @@ module.exports = {
             .catch(err => res.json(err));
     },
 
-    //  this sign - before filed name will remove the field when the user looking throw the jobs
     displayJobs: (req, res) => {
-        Job.find({}, '-applied_users')
+        JobSeeker.find({} , '~ jobs')
             .then(jobs => res.json(jobs))
             .catch(err => res.json(err));
     },
