@@ -108,7 +108,7 @@ module.exports = function (app) {
     });
 
     //user applied for a job
-    app.post('/user/applied', verifyToken, (req, res) => {
+    app.put('/user/applied', verifyToken, (req, res) => {
         jobSeekers.AppliedForJob(req, res);
     });
 
