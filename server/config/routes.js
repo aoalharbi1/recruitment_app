@@ -65,7 +65,7 @@ module.exports = function (app) {
         recruiters.getById(req, res);
     });
 
-    app.post('/recruiter', verifyToken, (req, res) => {
+    app.post('/recruiter', (req, res) => {
         recruiters.create(req, res);
     });
 
