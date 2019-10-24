@@ -9,23 +9,18 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 export class SearchComponent implements OnInit {
 
-  jobs: any
-  jobData: any = {
-
-  }
+  jobs: any;
+  jobData: any;
   constructor(private http: HttpService) {
 
-   }
+  }
 
   ngOnInit() {
-
     this.jobData = {
       _id: ""
-    }
-    this.getJobs()
+    };
 
-
-    console.log('getting data', this.jobs)
+    this.getJobs();
   }
 
   getJobs() {
@@ -35,17 +30,12 @@ export class SearchComponent implements OnInit {
     });
   }
 
-  userApplied(id){
+  userApplied(id) {
     this.jobData._id = id;
-    // this.http.getJobs()
     let observable = this.http.userApplied(this.jobData);
-    observable.subscribe(res  => {
+    observable.subscribe(res => {
       console.log(res)
-    }
-    // err => console.log(err)
-
-    )
-
+    });
   }
 
 

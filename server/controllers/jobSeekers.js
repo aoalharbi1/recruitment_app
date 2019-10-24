@@ -96,8 +96,9 @@ module.exports = {
 
     //user applied for a job
     AppliedForJob: (req, res) => {
+        
         if (!req.session.jobSeeker)
-            res.json("User not signed in");
+            return res.json("User not signed in");
 
         const job = req.body;
         const jobSeeker = req.session.jobSeeker;
