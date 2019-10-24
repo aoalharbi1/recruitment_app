@@ -107,14 +107,15 @@ module.exports = {
             Recruiter.find({ _id: req.query._id }, '~ jobs ')
                 .then(data => res.json(data))
                 .catch(err => res.json(err))
+        },
+        // this function the recruiter can see all jobs posted by him 
+        // this simple ~ to get only the field written after ~ 
+        displayJobs: (req, res) => {
+            Recruiter.find({ _id: req.query._id }, '~ jobs ')
+                .then(data => res.json(data))
+                .catch(err => res.json(err))
+    
         }
 
-    },
-    // this function the recruiter can see all jobs posted by him 
-    // this simple ~ to get only the field written after ~ 
-    displayJobs: (req, res) => {
-        Recruiter.find({ _id: req.query._id }, '~ jobs ')
-            .then(data => res.json(data))
-            .catch(err => res.json(err))
-
     }
+
