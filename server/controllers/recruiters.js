@@ -6,7 +6,7 @@ const passwordValidator = require('password-validator');
 
 module.exports = {
     getAll: (req, res) => {
-        Recruiter.find()
+        Recruiter.find({}, {'password': 0})
             .then(users => res.json(users))
             .catch(err => res.json(err));
     },
@@ -108,4 +108,13 @@ module.exports = {
                 .then(data => res.json(data))
                 .catch(err => res.json(err))
         }
+
+    },
+    // this function the recruiter can see all jobs posted by him 
+    // this simple ~ to get only the field written after ~ 
+    displayJobs: (req, res) => {
+        Recruiter.find({ _id: req.query._id }, '~ jobs ')
+            .then(data => res.json(data))
+            .catch(err => res.json(err))
+
     }

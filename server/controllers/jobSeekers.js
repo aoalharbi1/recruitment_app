@@ -6,7 +6,7 @@ const passwordValidator = require('password-validator');
 
 module.exports = {
     getAll: (req, res) => {
-        JobSeeker.find()
+        JobSeeker.find({}, {'password': 0})
             .then(users => res.json(users))
             .catch(err => res.json(err));
     },
