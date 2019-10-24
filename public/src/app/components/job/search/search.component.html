@@ -5,31 +5,37 @@
         <div class="card-body">
             <form action="" class="form-group">
                 <div class="row">
-                    <div class="col-md-3"> <!-- Country -->
+                    <div class="col-md-3">
+                        <!-- Country -->
                         <label for="" class="form-group">Country </label>
                         <select class="custom-select">
                             <option value="" class="form-group">Saudi Arabia</option>
                             <option value="" class="form-group">Egypt</option>
                             <option value="" class="form-group">Jordan</option>
                         </select>
-                    </div> <!--End of Col-->
+                    </div>
+                    <!--End of Col-->
 
-                    <div class="col-md-3"> <!-- Country -->
+                    <div class="col-md-3">
+                        <!-- Country -->
                         <label for="" class="form-group">Level</label>
                         <select class="custom-select">
                             <option value="" class="form-group">Entry Level</option>
                             <option value="" class="form-group">Senior</option>
                         </select>
-                    </div> <!--End of Col-->
+                    </div>
+                    <!--End of Col-->
 
-                    <div class="col-md-3"> <!-- Country -->
+                    <div class="col-md-3">
+                        <!-- Country -->
                         <label for="" class="form-group">Field </label>
                         <select class="custom-select">
                             <option value="" class="form-group">Engineering</option>
                             <option value="" class="form-group">Sales</option>
                             <option value="" class="form-group">Medical,Healthcare</option>
                         </select>
-                    </div> <!--End of Col-->
+                    </div>
+                    <!--End of Col-->
 
 
 
@@ -42,12 +48,13 @@
             <div class="card-body">
                 <h5 class="card-title">{{job.title}}</h5>
                 <img src="https://picsum.photos/seed/picsum/150/150" alt="" class="img-fluid rounded shadow card-title">
-                <h6 class="card-subtitle mb-2 text-muted">SITE</h6>
-                <p class="card-text">Coordinate meetings, arrange for conference rooms, equipment and organize material for meetings, presentations, and training sessions on the share drives while maintaining version control.</p>
+                <h6 class="card-subtitle mb-2 text-muted">{{job.company}}</h6>
+                <p class="card-text">{{ job.description }}</p>
                 <a href="#" class="btn btn-primary">View More info</a>
-                <a href="#" class="btn btn-info">Apply</a>
+                <a class="btn btn-info"  (click) = "userApplied(job._id)" >  Apply</a>
             </div>
-        </div> <!--End of job-->
+        </div>
+        <!--End of job-->
 
 
     </div>
