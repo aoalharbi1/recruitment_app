@@ -29,10 +29,10 @@
                             class="sr-only">(current)</span></a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="!is_login">
                     <a class="nav-link" [routerLink]="['register']" ><i class="material-icons">person_outline</i>Register</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="!is_login">
                     <a class="nav-link" [routerLink]="['login']" ><i class="material-icons">person</i>Login</a>
                 </li>
 

@@ -14,4 +14,7 @@ export class HttpService {
     return this.http.get('/jobs');
   }
 
+  userApplied(job){
+    return  this.http.put('/user/applied' , job);
+  }
 }
