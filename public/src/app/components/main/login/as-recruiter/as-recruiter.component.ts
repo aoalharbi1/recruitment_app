@@ -33,6 +33,7 @@ export class AsRecruiterComponent implements OnInit {
         res => {
 
           if (!res.token) {
+            console.log(res);
             return;
           }
 
