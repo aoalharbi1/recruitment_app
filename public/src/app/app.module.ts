@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 
@@ -9,10 +10,10 @@ import { JobComponent } from './components/job/job.component';
 import { IndexComponent } from './components/main/index/index.component';
 import { AppRoutingModule } from './app-routing.module'
 
-import {SearchComponent} from './components/job/search/search.component'
+import { SearchComponent } from './components/job/search/search.component'
 
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpService } from './http.service';
 import { HttpClient } from '@angular/common/http';
 import { FooterComponent } from './components/main/footer/footer.component';
@@ -28,8 +29,11 @@ import { StatusComponent } from './components/recruiter/job_posted/applied_user/
 import { AdminComponent } from './components/admin/admin.component';
 import { AsUserComponent } from './components/main/login/as-user/as-user.component';
 import { AsRecruiterComponent } from './components/main/login/as-recruiter/as-recruiter.component';
-import{ AsRecruiterRegComponent} from './components/main/register/as-recruiter/as-recruiter-reg.component'
-import{AsUserRegComponent} from './components/main/register/as-user/as-user-reg.component'
+import { AsRecruiterRegComponent } from './components/main/register/as-recruiter/as-recruiter-reg.component'
+import { AsUserRegComponent } from './components/main/register/as-user/as-user-reg.component'
+import { AuthService } from './auth.service';
+import { AuthGuard } from './auth.guard';
+import { TokenInterceptorService } from './token-interceptor.service';
 
 
 @NgModule({
@@ -54,15 +58,19 @@ import{AsUserRegComponent} from './components/main/register/as-user/as-user-reg.
     AsRecruiterComponent,
     AsRecruiterRegComponent,
     AsUserRegComponent,
-
-    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [HttpService],
+  providers: [HttpService, AuthService, AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

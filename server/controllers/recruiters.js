@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Recruiter = mongoose.model('Recruiter');
 const bcrypt = require('bcrypt');
 const passwordValidator = require('password-validator');
+const jwt = require('jsonwebtoken');
 
 
 module.exports = {
@@ -47,7 +48,24 @@ module.exports = {
 
                 return Recruiter.create(newRecruiter);
             })
-            .then(savedResult => res.json(savedResult))
+            .then(savedResult => {
+                
+                let payload = { subject: savedResult._id }
+                let token = jwt.sign(payload, 'ThisIsSecret');
+
+                req.session.recruiter = {
+                    _id: savedResult._id,
+                    first_name: savedResult.first_name,
+                    last_name: savedResult.last_name,
+                    email: savedResult.email,
+                    companyName: savedResult.companyName,
+                    website: savedResult.website,
+                    active: savedResult.active,
+                    jobs: savedResult.jobs,
+                    token: token
+                }
+                res.json(req.session.recruiter);
+            })
             .catch(err => res.json(err));
     },
 
@@ -82,6 +100,9 @@ module.exports = {
                 }
                 try {
                     if (req.body.password && await bcrypt.compare(req.body.password, recruiter.password)) {
+                        let payload = { subject: recruiter._id };
+                        let token = jwt.sign(payload, 'ThisIsSecret');
+
                         req.session.recruiter = {
                             _id: recruiter._id,
                             first_name: recruiter.first_name,
@@ -89,7 +110,9 @@ module.exports = {
                             email: recruiter.email,
                             website: recruiter.website,
                             companyName: recruiter.companyName,
-                            jobs: recruiter.jobs
+                            jobs: recruiter.jobs,
+                            active: recruiter.active,
+                            token: token
                         }
                         return res.json(req.session.recruiter);
                     }

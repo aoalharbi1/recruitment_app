@@ -4,7 +4,7 @@ const JobSeeker = mongoose.model('JobSeeker');
 
 module.exports = {
     getAll: (req, res) => {
-        Job.find()
+        Job.find({}, {'applied_users': 0})
             .then(jobs => res.json(jobs))
             .catch(err => res.json(err));
     },

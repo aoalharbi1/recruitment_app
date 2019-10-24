@@ -3,10 +3,11 @@ const JobSeeker = mongoose.model('JobSeeker');
 const bcrypt = require('bcrypt');
 const Job = mongoose.model('Job');
 const passwordValidator = require('password-validator');
+const jwt = require('jsonwebtoken');
 
 module.exports = {
     getAll: (req, res) => {
-        JobSeeker.find({}, {'password': 0})
+        JobSeeker.find({}, { 'password': 0 })
             .then(users => res.json(users))
             .catch(err => res.json(err));
     },
@@ -47,7 +48,20 @@ module.exports = {
 
                 return JobSeeker.create(newUser);
             })
-            .then(savedResult => res.json(savedResult))
+            .then(savedResult => {
+                let payload = { subject: savedResult._id }
+                let token = jwt.sign(payload, 'ThisIsSecret');
+
+                req.session.savedResult = {
+                    _id: savedResult._id,
+                    first_name: savedResult.first_name,
+                    last_name: savedResult.last_name,
+                    email: savedResult.email,
+                    info: savedResult.info,
+                    token: token
+                }
+                res.json(req.session.savedResult);
+            })
             .catch(err => res.json(err));
     },
 
@@ -100,12 +114,16 @@ module.exports = {
                 }
                 try {
                     if (req.body.password && await bcrypt.compare(req.body.password, jobSeeker.password)) {
+                        let payload = { subject: jobSeeker._id };
+                        let token = jwt.sign(payload, 'ThisIsSecret');
+                        
                         req.session.jobSeeker = {
                             _id: jobSeeker._id,
                             first_name: jobSeeker.first_name,
                             last_name: jobSeeker.last_name,
                             email: jobSeeker.email,
-                            info: jobSeeker.info
+                            info: jobSeeker.info,
+                            token: token
                         }
 
                         return res.json(req.session.jobSeeker);
