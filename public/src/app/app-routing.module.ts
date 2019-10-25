@@ -15,12 +15,12 @@ import { AdminComponent } from './components/admin/admin.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
-  { path: 'findjob', component: JobComponent, canActivate: [AuthGuard] },
+  { path: 'findjob', component: JobComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'displayjobs', component: UserComponent }, // landing page for job seekers
-  { path: 'editprofile', component: EditProfileComponent }, // edit profile page for job seekers
-  { path: 'jobdetails', component: JobComponent }, //  job details page for job seekers
+  { path: 'displayjobs', component: UserComponent, canActivate: [AuthGuard] }, // landing page for job seekers
+  { path: 'editprofile', component: EditProfileComponent, canActivate: [AuthGuard] }, // edit profile page for job seekers
+  { path: 'jobdetails', component: JobComponent, canActivate: [AuthGuard] }, //  job details page for job seekers
   { path: 'admin', component: AdminComponent }
 ];
 

@@ -11,6 +11,7 @@ import { HttpService } from 'src/app/http.service';
 export class NavbarComponent implements OnInit {
 
   is_login: boolean
+  admin: boolean = false;
   userData: any;
   constructor(
     private _interactionService: InteractionService,
@@ -35,6 +36,10 @@ export class NavbarComponent implements OnInit {
           localStorage.setItem('last_name', data.last_name);
           localStorage.setItem('email', data.email);
           localStorage.setItem('_id', data._id);
+
+          if(data.admin){
+            this.admin = true;
+          }
         }
       );
   }
