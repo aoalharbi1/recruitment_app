@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +29,8 @@ export class HttpService {
   sign_out() {
     return this.http.get('/sign_out');
   }
-  appliedUsers(){
+
+  appliedUsers() {
     return this.http.get('/user/jobs');
   }
   recruitersById(){

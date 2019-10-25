@@ -45,8 +45,9 @@ export class AdminComponent implements OnInit {
 
           this.admin_data.password = "";
           localStorage.setItem('token', res.token);
-          this.logged_in = true;
           this._interactionService.notify(res);
+          this.getRec();
+          this.logged_in = true;
           this._router.navigate(['/admin']);
         },
         err => console.log(err)

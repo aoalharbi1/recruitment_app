@@ -16,13 +16,19 @@ import { EditRecruiterComponent } from './components/recruiter/edit-recruiter/ed
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
-  { path: 'findjob', component: JobComponent, canActivate: [AuthGuard] },
+  { path: 'findjob', component: JobComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+<<<<<<< HEAD
   { path: 'displayjobs', component: UserComponent }, // landing page for job seekers
   { path: 'editprofile', component: EditProfileComponent }, // edit profile page for job seekers
   { path: "edit_recruiter", component: EditRecruiterComponent},
   { path: 'jobdetails', component: JobComponent }, //  job details page for job seekers
+=======
+  { path: 'displayjobs', component: UserComponent, canActivate: [AuthGuard] }, // landing page for job seekers
+  { path: 'editprofile', component: EditProfileComponent, canActivate: [AuthGuard] }, // edit profile page for job seekers
+  { path: 'jobdetails', component: JobComponent, canActivate: [AuthGuard] }, //  job details page for job seekers
+>>>>>>> a2f2fbc70bb9d36a9daf9f2ef0ec39cd2f6d2da7
   { path: 'admin', component: AdminComponent }
 ];
 

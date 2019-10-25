@@ -30,7 +30,7 @@ module.exports = {
             .has().symbols()
             .has(/[!@#$%&*]/g)
             .has().not().spaces();
-        
+
         JobSeeker.find({ email: user.email })
             .then(result => {
                 if (result.length > 0) {
@@ -43,13 +43,12 @@ module.exports = {
                 return bcrypt.hash(newUser.password, 10);
             })
             .then(hashedPassword => {
-                console.log(hashedPassword);
-                
+
                 let newUser = user;
                 newUser.password = hashedPassword;
                 return JobSeeker.create(newUser);
             })
-            .then(savedResult => {    
+            .then(savedResult => {
                 let payload = { subject: savedResult._id }
                 let token = jwt.sign(payload, 'ThisIsSecret');
 
@@ -98,14 +97,17 @@ module.exports = {
 
     //user applied for a job
     AppliedForJob: (req, res) => {
-        
-        // if (!req.session.jobSeeker)
-        //     return res.json("User not signed in");
+
+        if (!req.session.jobSeeker)
+            return res.json("User not signed in");
 
         const job = req.body;
         const jobSeeker = req.session.jobSeeker;
-        Job.findOneAndUpdate({ _id: jobSeeker._id }, { $push: { jobs: job } }, { new: true })
-            .then(result => res.json(result))
+
+        JobSeeker.updateOne({ _id: jobSeeker._id, 'jobs._id': { $ne: job._id } }, { $addToSet: { jobs: job } }, { new: true })
+            .then(result => {
+                res.json(result.n);
+            })
             .catch(err => res.json(err));
     },
 
@@ -119,16 +121,17 @@ module.exports = {
                     if (req.body.password && await bcrypt.compare(req.body.password, jobSeeker.password)) {
                         let payload = { subject: jobSeeker._id };
                         let token = jwt.sign(payload, 'ThisIsSecret');
-                        
+
                         req.session.jobSeeker = {
                             _id: jobSeeker._id,
                             first_name: jobSeeker.first_name,
                             last_name: jobSeeker.last_name,
                             email: jobSeeker.email,
                             info: jobSeeker.info,
+                            jobs: jobSeeker.jobs,
                             token: token
                         }
-                        
+
                         return res.json(req.session.jobSeeker);
                     }
                     return Promise.reject("Error: password is incorrect")
@@ -141,7 +144,7 @@ module.exports = {
     },
 
     displayJobs: (req, res) => {
-        JobSeeker.find({_id: req.query._id} , '~ jobs')
+        JobSeeker.find({ _id: req.query._id }, '~ jobs')
             .then(jobs => res.json(jobs))
             .catch(err => res.json(err));
     },

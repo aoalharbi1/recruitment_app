@@ -11,7 +11,10 @@ export class SearchComponent implements OnInit {
 
   jobs: any;
   jobData: any;
-  constructor(private http: HttpService) {
+  constructor(
+    private http: HttpService,
+    private _router: Router,
+  ) {
 
   }
 
@@ -24,20 +27,24 @@ export class SearchComponent implements OnInit {
   }
 
   getJobs() {
-    let observable = this.http.getJobs()
+    let observable = this.http.getJobs();
     observable.subscribe(data => {
       this.jobs = data;
     });
   }
 
-  userApplied(id) {
-    this.jobData._id = id;
-    let observable = this.http.userApplied(this.jobData);
+  userApplied(job) {
+    if (!localStorage.getItem('token')) {
+      return this._router.navigate(['/login']);
+    }
+
+    let observable = this.http.userApplied(job);
     observable.subscribe(res => {
-      console.log(res);
+      if (res === 1) {
+        job.applied = true;
+      } else if (res === 0) {
+        job.applied = false;
+      }
     });
   }
-
-
-
 }
