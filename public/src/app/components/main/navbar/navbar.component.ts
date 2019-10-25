@@ -17,7 +17,7 @@ export class NavbarComponent implements OnInit {
     private _interactionService: InteractionService,
     private _http: HttpService,
     private _router: Router
-    ) { }
+  ) { }
 
   ngOnInit() {
     if (!localStorage.getItem('token')) {
@@ -36,8 +36,15 @@ export class NavbarComponent implements OnInit {
           localStorage.setItem('last_name', data.last_name);
           localStorage.setItem('email', data.email);
           localStorage.setItem('_id', data._id);
+          localStorage.setItem('gender', data.info.gender);
+          localStorage.setItem('phone', data.info.phone);
+          localStorage.setItem('city', data.info.city);
+          localStorage.setItem('gpa', data.info.gpa);
+          localStorage.setItem('university', data.info.university);
+          localStorage.setItem('major', data.info.major);
+          localStorage.setItem('education', data.info.education);
 
-          if(data.admin){
+          if (data.admin) {
             this.admin = true;
           }
         }
