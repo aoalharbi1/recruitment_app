@@ -29,19 +29,19 @@ export class HttpService {
   sign_out() {
     return this.http.get('/sign_out');
   }
-  appliedUsers(){
+  appliedUsers() {
     return this.http.get('/user/jobs');
   }
-  recruitersById(){
-    return this.http.get('/recruiter' );
+  recruitersById() {
+    return this.http.get('/recruiter');
   }
-  updateRecruitersById(rec){
-    console.log(rec , "http");
-    return this.http.put('/recruiter', rec );
+  updateRecruitersById(rec) {
+    console.log(rec, "http");
+    return this.http.put('/recruiter', rec);
   }
 
-  updateUsersById(user){
-    console.log(user , "http");
-    return this.http.put('/user', user );
+  updateUsersById(user) {
+    console.log(user, "http");
+    return this.http.put('/user', user);
   }
 }
