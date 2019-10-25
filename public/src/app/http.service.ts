@@ -18,12 +18,12 @@ export class HttpService {
     return this.http.put('/user/applied', job);
   }
 
-  getRecruiter() {
-    return this.http.get('/recruiters');
+  getRecruiters() {
+    return this.http.get('/admin/recruiters');
   }
 
-  ActivateRec(rec, id) {
-    return this.http.put('/admin/activate', rec, id);
+  ActivateRec(rec) {
+    return this.http.put('/admin/activate', rec);
   }
 
   sign_out() {

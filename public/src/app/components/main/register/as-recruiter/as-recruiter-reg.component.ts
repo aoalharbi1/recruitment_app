@@ -33,6 +33,8 @@ export class AsRecruiterRegComponent implements OnInit {
       .subscribe(
         res => {
           if (!res.token) {
+            console.log(res);
+
             return;
           }
 

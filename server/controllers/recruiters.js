@@ -65,6 +65,7 @@ module.exports = {
                     token: token
                 }
                 res.json(req.session.recruiter);
+                
             })
             .catch(err => res.json(err));
     },

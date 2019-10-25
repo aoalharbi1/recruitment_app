@@ -43,6 +43,8 @@ module.exports = {
                 return bcrypt.hash(newUser.password, 10);
             })
             .then(hashedPassword => {
+                console.log(hashedPassword);
+                
                 let newUser = user;
                 newUser.password = hashedPassword;
                 return JobSeeker.create(newUser);

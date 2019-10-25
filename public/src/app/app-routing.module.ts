@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: 'displayjobs', component: UserComponent }, // landing page for job seekers
   { path: 'editprofile', component: EditProfileComponent }, // edit profile page for job seekers
   { path: 'jobdetails', component: JobComponent }, //  job details page for job seekers
+  { path: 'admin', component: AdminComponent }
 ];
 
 @NgModule({
