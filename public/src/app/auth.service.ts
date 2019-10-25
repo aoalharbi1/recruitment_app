@@ -8,6 +8,8 @@ export class AuthService {
 
   private _recruiterRegisterUrl = '/recruiter';
   private _recruiterLoginUrl = '/recruiter/login';
+  private _jobSeekerRegisterUrl = '/user';
+  private _jobSeekerLoginUrl = '/user/login';
 
   constructor(private http: HttpClient) { }
 
@@ -19,6 +21,14 @@ export class AuthService {
     return this.http.post<any>(this._recruiterLoginUrl, user);
   }
 
+  registerJobSeeker(user) {
+    return this.http.post<any>(this._jobSeekerRegisterUrl, user);
+  }
+
+  loginJobSeeker(user) {
+    return this.http.post<any>(this._jobSeekerLoginUrl, user);
+  }
+
   loggedIn() {
     console.log(!!localStorage.getItem('token'));
 
@@ -26,6 +36,6 @@ export class AuthService {
   }
 
   getToken() {
-    return localStorage.getItem('token')
+    return localStorage.getItem('token');
   }
 }

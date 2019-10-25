@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpService} from '../../http.service'
+import { HttpService } from '../../http.service'
 
 @Component({
   selector: 'app-admin',
@@ -8,24 +8,24 @@ import {HttpService} from '../../http.service'
 })
 export class AdminComponent implements OnInit {
 
-  recruiters:any
-  is_active:boolean=false
-  selectedRec:any
+  recruiters: any
+  is_active: boolean = false
+  selectedRec: any
 
-  id_value:any
+  id_value: any
 
-  
-  constructor(private http:HttpService) { }
+
+  constructor(private http: HttpService) { }
 
   ngOnInit() {
     this.selectedRec = { _id: "", active: "" };
-    this.getRec() 
-    
+    this.getRec()
+
   }
 
 
   //Getting All Recruiters
-  getRec(){
+  getRec() {
     let observable = this.http.getRecruiter()
     observable.subscribe(data => {
       this.recruiters = data
@@ -34,7 +34,7 @@ export class AdminComponent implements OnInit {
   }
 
 
-//HTML Activating 
+  //HTML Activating
   /* activate(){
     if (this.is_active==false){
       this.is_active=true
@@ -44,27 +44,27 @@ export class AdminComponent implements OnInit {
       console.log("this Recruiter is activated")
     }
   } */
-//Not Working logic for activating the recruiters
+  //Not Working logic for activating the recruiters
 
-/*   updateRecStatus(rec){
-    const observable = this.http.ActivateRec(rec);
-    observable.subscribe(data => {
-      this.getRec();
-      this.recruiters = data;
-      this.selectedRec = { _id: data._id, active: "true" };
-      console.log("HI",this.selectedRec)
-    });
-  } */
+  /*   updateRecStatus(rec){
+      const observable = this.http.ActivateRec(rec);
+      observable.subscribe(data => {
+        this.getRec();
+        this.recruiters = data;
+        this.selectedRec = { _id: data._id, active: "true" };
+        console.log("HI",this.selectedRec)
+      });
+    } */
 
-  updateRecStatus(){
-    console.log("edit",this.selectedRec)
+  updateRecStatus() {
+    console.log("edit", this.selectedRec)
     let observable = this.http.ActivateRec(this.id_value, this.selectedRec)
-    observable.subscribe((data:any) => {
-      this.selectedRec = {_id: '5db0ca4d37ac2c44846f605d'  /* data._id */, active: true /* data.active */}
+    observable.subscribe((data: any) => {
+      this.selectedRec = { _id: '5db0ca4d37ac2c44846f605d'  /* data._id */, active: true /* data.active */ }
       console.log('after', this.selectedRec)
     })
     this.getRec()
-    this.id_value = "" 
+    this.id_value = ""
   }
 
 

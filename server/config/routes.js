@@ -95,7 +95,7 @@ module.exports = function (app) {
         jobSeekers.getById(req, res);
     });
 
-    app.post('/user', verifyToken, (req, res) => {
+    app.post('/user', (req, res) => {
         jobSeekers.create(req, res);
     });
 

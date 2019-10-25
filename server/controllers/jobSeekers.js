@@ -30,7 +30,7 @@ module.exports = {
             .has().symbols()
             .has(/[!@#$%&*]/g)
             .has().not().spaces();
-
+        
         JobSeeker.find({ email: user.email })
             .then(result => {
                 if (result.length > 0) {
@@ -45,14 +45,13 @@ module.exports = {
             .then(hashedPassword => {
                 let newUser = user;
                 newUser.password = hashedPassword;
-
                 return JobSeeker.create(newUser);
             })
-            .then(savedResult => {
+            .then(savedResult => {    
                 let payload = { subject: savedResult._id }
                 let token = jwt.sign(payload, 'ThisIsSecret');
 
-                req.session.savedResult = {
+                req.session.jobSeeker = {
                     _id: savedResult._id,
                     first_name: savedResult.first_name,
                     last_name: savedResult.last_name,
@@ -60,7 +59,8 @@ module.exports = {
                     info: savedResult.info,
                     token: token
                 }
-                res.json(req.session.savedResult);
+
+                res.json(req.session.jobSeeker);
             })
             .catch(err => res.json(err));
     },
@@ -126,7 +126,7 @@ module.exports = {
                             info: jobSeeker.info,
                             token: token
                         }
-
+                        
                         return res.json(req.session.jobSeeker);
                     }
                     return Promise.reject("Error: password is incorrect")

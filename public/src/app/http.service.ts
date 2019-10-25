@@ -14,7 +14,15 @@ export class HttpService {
     return this.http.get('/jobs');
   }
 
-  userApplied(job){
-    return  this.http.put('/user/applied' , job);
+  userApplied(job) {
+    return this.http.put('/user/applied', job);
+  }
+
+  getRecruiter() {
+    return this.http.get('/recruiters');
+  }
+
+  ActivateRec(rec, id) {
+    return this.http.put('/admin/activate', rec, id);
   }
 }
