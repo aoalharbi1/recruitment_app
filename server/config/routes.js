@@ -84,14 +84,10 @@ module.exports = function (app) {
         recruiters.create(req, res);
     });
 
-<<<<<<< HEAD
-    app.put('/recruiter',  (req, res) => {
-=======
     app.put('/recruiter', verifyToken, (req, res) => {
         if (!req.session.recruiter)
             return res.redirect("/unauthorized");
 
->>>>>>> a2f2fbc70bb9d36a9daf9f2ef0ec39cd2f6d2da7
         recruiters.update(req, res);
     });
 
