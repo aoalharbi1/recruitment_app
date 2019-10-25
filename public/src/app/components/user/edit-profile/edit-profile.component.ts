@@ -36,7 +36,7 @@ export class EditProfileComponent implements OnInit {
 
 
     let observable = this.http.updateRecruitersById(this.recruiter);
-    observable.subscribe(res => { console.log("111", res) });
+    observable.subscribe(res => {});
   }
 
 }
