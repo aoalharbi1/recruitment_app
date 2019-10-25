@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { InteractionService } from 'src/app/interaction.service';
 
 @Component({
   selector: 'app-as-recruiter',
@@ -13,7 +14,8 @@ export class AsRecruiterComponent implements OnInit {
   recruiterData: any = {};
   constructor(
     private _auth: AuthService,
-    private _router: Router
+    private _router: Router,
+    private _interactionService: InteractionService
   ) { }
 
   ngOnInit() {
@@ -39,6 +41,7 @@ export class AsRecruiterComponent implements OnInit {
 
           this.recruiterData.password = "";
           localStorage.setItem('token', res.token);
+          this._interactionService.notify(res);
           this._router.navigate(['/findjob']);
         },
         err => console.log(err)

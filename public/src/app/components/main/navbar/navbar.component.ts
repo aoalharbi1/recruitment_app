@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { InteractionService } from 'src/app/interaction.service';
+import { Router } from '@angular/router';
+import { HttpService } from 'src/app/http.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,10 +11,41 @@ import { Component, OnInit } from '@angular/core';
 export class NavbarComponent implements OnInit {
 
   is_login: boolean
-  constructor() { }
+  userData: any;
+  constructor(
+    private _interactionService: InteractionService,
+    private _http: HttpService,
+    private _router: Router
+    ) { }
 
   ngOnInit() {
-    this.is_login = false;
+    if (!localStorage.getItem('token')) {
+      this.is_login = false;
+    } else {
+      this.is_login = true;
+      this.userData = localStorage;
+    }
+    this._interactionService.login$
+      .subscribe(
+        data => {
+          this.is_login = true;
+          this.userData = data;
+
+          localStorage.setItem('first_name', data.first_name);
+          localStorage.setItem('last_name', data.last_name);
+          localStorage.setItem('email', data.email);
+          localStorage.setItem('_id', data._id);
+        }
+      );
   }
 
+  sign_out() {
+    localStorage.clear();
+    this.is_login = false;
+    this.userData = {};
+    this._router.navigate(['/']);
+
+    this._http.sign_out()
+      .subscribe(res => console.log(res));
+  }
 }

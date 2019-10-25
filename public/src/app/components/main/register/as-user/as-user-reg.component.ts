@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth.service';
 import { Router } from '@angular/router';
+import { InteractionService } from 'src/app/interaction.service';
 
 @Component({
   selector: 'app-as-user_reg',
@@ -12,7 +13,8 @@ export class AsUserRegComponent implements OnInit {
   registerJobSeekerData: any = {};
   constructor(
     private _auth: AuthService,
-    private _router: Router
+    private _router: Router,
+    private _interactionService: InteractionService
   ) { }
 
   ngOnInit() {
@@ -35,6 +37,7 @@ export class AsUserRegComponent implements OnInit {
 
           this.registerJobSeekerData.password = "";
           localStorage.setItem('token', res.token);
+          this._interactionService.notify(res);
           this._router.navigate(['/findjob']);
         },
         err => console.log(err)

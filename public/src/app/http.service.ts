@@ -25,4 +25,8 @@ export class HttpService {
   ActivateRec(rec, id) {
     return this.http.put('/admin/activate', rec, id);
   }
+
+  sign_out() {
+    return this.http.get('/sign_out');
+  }
 }

@@ -34,7 +34,7 @@ export class SearchComponent implements OnInit {
     this.jobData._id = id;
     let observable = this.http.userApplied(this.jobData);
     observable.subscribe(res => {
-      console.log(res)
+      console.log(res);
     });
   }
 

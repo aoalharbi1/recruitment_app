@@ -25,7 +25,7 @@
             </div>
             <ul class="navbar-nav ml-lg-auto">
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['jobseeker']"><i class="material-icons">search</i>Discover <span
+                    <a class="nav-link" [routerLink]="['findjob']"><i class="material-icons">search</i>Discover <span
                             class="sr-only">(current)</span></a>
                 </li>
 
@@ -38,12 +38,12 @@
 
                 <li class="nav-item dropdown" *ngIf="is_login">
                     <a class="nav-link" href="#" id="navbar-primary_dropdown_1" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false"><i class="material-icons">badge</i>John Doe</a>
+                        aria-haspopup="true" aria-expanded="false"><i class="material-icons">badge</i>{{userData.first_name}} {{userData.last_name}}</a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-primary_dropdown_1">
                         <a class="dropdown-item" href="#">View Profile</a>
                         <a class="dropdown-item" href="#">View jobs</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Sing out</a>
+                        <a class="dropdown-item" (click)="sign_out()" >Sing out</a>
                     </div>
                 </li>
 

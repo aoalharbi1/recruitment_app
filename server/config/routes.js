@@ -134,6 +134,12 @@ module.exports = function (app) {
         admin.login(req, res);
     });
 
+    app.get('/sign_out', (req, res) => {
+        req.session.destroy();
+        
+        return res.json("signed out");
+    });
+
     app.all("*", (req, res, next) => {
         res.sendFile(path.resolve("./public/dist/public/index.html"))
     });
