@@ -10,6 +10,7 @@ import { LoginComponent } from './components/main/login/login.component';
 import { RegisterComponent } from './components/main/register/register.component';
 import { AuthGuard } from './auth.guard';
 import { UserComponent } from './components/user/user.component';
+import { EditProfileComponent } from './components/user/edit-profile/edit-profile.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
@@ -17,6 +18,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'displayjobs', component: UserComponent }, // landing page for job seekers
+  { path: 'editprofile', component: EditProfileComponent }, // edit profile page for job seekers
+  { path: 'jobdetails', component: JobComponent }, //  job details page for job seekers
 ];
 
 @NgModule({
