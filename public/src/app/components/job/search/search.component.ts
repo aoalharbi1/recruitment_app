@@ -30,11 +30,15 @@ export class SearchComponent implements OnInit {
     });
   }
 
-  userApplied(id) {
-    this.jobData._id = id;
-    let observable = this.http.userApplied(this.jobData);
+  userApplied(job) {
+
+    let observable = this.http.userApplied(job);
     observable.subscribe(res => {
-      console.log(res);
+      if (res === 1) {
+        job.applied = true;
+      } else if ( res === 0 ){
+        job.applied = false;
+      }
     });
   }
 
