@@ -37,7 +37,6 @@ export class HttpService {
     return this.http.get('/recruiter' );
   }
   updateRecruitersById(rec){
-    console.log(rec , "http");
     return this.http.put('/recruiter', rec );
   }
 }
