@@ -11,6 +11,7 @@ import { RegisterComponent } from './components/main/register/register.component
 import { AuthGuard } from './auth.guard';
 import { UserComponent } from './components/user/user.component';
 import { EditProfileComponent } from './components/user/edit-profile/edit-profile.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
