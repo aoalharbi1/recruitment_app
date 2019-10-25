@@ -23,7 +23,7 @@ export class EditProfileComponent implements OnInit {
       website: ""
     };
   }
-
+    
   // getRecruitersById() {
   //   let observable = this.http.recruitersById();
   //   observable.subscribe(data => {
