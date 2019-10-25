@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpService } from '../../http.service';
 
 @Component({
   selector: 'app-user',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
-  constructor() { }
+  appliedJobs: any;
+  constructor(private http: HttpService) { }
 
   ngOnInit() {
+    this.getAppliedUsers();
+  }
+
+  getAppliedUsers() {
+    let observable = this.http.appliedUsers();
+    observable.subscribe(data => {
+      console.log(data);
+      this.appliedJobs = data;
+    });
   }
 
 }

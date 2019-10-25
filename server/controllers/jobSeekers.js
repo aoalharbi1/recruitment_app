@@ -139,7 +139,7 @@ module.exports = {
     },
 
     displayJobs: (req, res) => {
-        JobSeeker.find({} , '~ jobs')
+        JobSeeker.find({_id: req.query._id} , '~ jobs')
             .then(jobs => res.json(jobs))
             .catch(err => res.json(err));
     },
