@@ -18,7 +18,11 @@ export class SearchComponent implements OnInit {
   lvl
   field
   
-  constructor(private http: HttpService) {
+  
+  constructor(
+    private http: HttpService,
+    private _router: Router,
+  ) {
 
   }
 
@@ -32,19 +36,22 @@ export class SearchComponent implements OnInit {
   }
 
   getJobs() {
-    let observable = this.http.getJobs()
+    let observable = this.http.getJobs();
     observable.subscribe(data => {
       this.jobs = data;
     });
   }
 
   userApplied(job) {
+    if (!localStorage.getItem('token')) {
+      return this._router.navigate(['/login']);
+    }
 
     let observable = this.http.userApplied(job);
     observable.subscribe(res => {
       if (res === 1) {
         job.applied = true;
-      } else if ( res === 0 ){
+      } else if (res === 0) {
         job.applied = false;
       }
     });

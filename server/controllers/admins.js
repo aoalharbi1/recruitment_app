@@ -41,9 +41,7 @@ module.exports = {
                             first_name: admin.first_name,
                             last_name: admin.last_name,
                             email: admin.email,
-                            website: admin.website,
-                            companyName: admin.companyName,
-                            jobs: admin.jobs,
+                            admin: true,
                             token: token
                         }
                         return res.json(req.session.admin);
