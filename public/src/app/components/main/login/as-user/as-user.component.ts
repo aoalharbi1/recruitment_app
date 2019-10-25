@@ -38,7 +38,7 @@ export class AsUserComponent implements OnInit {
           this.jobSeekerData.password = "";
           localStorage.setItem('token', res.token);
           this._interactionService.notify(res);
-          this._router.navigate(['/findjob']);
+          this._router.navigate(['/displayjobs']);
         },
         err => console.log(err)
 

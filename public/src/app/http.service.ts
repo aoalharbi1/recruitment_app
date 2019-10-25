@@ -29,4 +29,7 @@ export class HttpService {
   sign_out() {
     return this.http.get('/sign_out');
   }
+  appliedUsers(){
+    return this.http.get('/user/jobs');
+  }
 }

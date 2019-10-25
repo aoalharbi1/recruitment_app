@@ -97,8 +97,8 @@ module.exports = {
     //user applied for a job
     AppliedForJob: (req, res) => {
         
-        if (!req.session.jobSeeker)
-            return res.json("User not signed in");
+        // if (!req.session.jobSeeker)
+        //     return res.json("User not signed in");
 
         const job = req.body;
         const jobSeeker = req.session.jobSeeker;
@@ -139,7 +139,7 @@ module.exports = {
     },
 
     displayJobs: (req, res) => {
-        JobSeeker.find({} , '~ jobs')
+        JobSeeker.find({_id: req.query._id} , '~ jobs')
             .then(jobs => res.json(jobs))
             .catch(err => res.json(err));
     },

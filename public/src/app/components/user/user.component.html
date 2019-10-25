@@ -1,1 +1,12 @@
-<p>user works!</p>
+<!-- display jobs here -->
+<div class="card ml-4 mr-4 mb-4" style="width: 95%; border: solid 1px #5e72e4; " *ngFor="let job of appliedJobs">
+    <div class="card-body">
+        <h5 class="card-title">{{job.title}}</h5>
+        <img src="https://picsum.photos/seed/picsum/150/150" alt="" class="img-fluid rounded shadow card-title">
+        <h6 class="card-subtitle mb-2 text-muted">{{job.company}}</h6>
+        <p class="card-text">{{ job.description }}</p>
+        <a href="#" class="btn btn-primary">View More info</a>
+        <a class="btn btn-info"  (click) = "userApplied(job._id)" >  Apply</a>
+    </div>
+</div>
+<!-- end of display jobs -->
