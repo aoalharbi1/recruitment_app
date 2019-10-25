@@ -68,6 +68,8 @@ module.exports = {
 
     update: (req, res) => {
         const data = req.body;
+        console.log(data);
+        
 
         JobSeeker.findOne({ _id: data._id })
             .then(user => {
