@@ -130,8 +130,13 @@ module.exports = function (app) {
         admin.activateOrDeactivate(req, res);
     });
 
-    app.post('/admin/login', verifyToken, (req, res) => {
+    app.post('/admin/login', (req, res) => {
         admin.login(req, res);
+    });
+    
+    // for testing, this will create and admin account
+    app.post('/admin', (res,req)=> {
+        admin.create(req, res);
     });
 
     app.get('/sign_out', (req, res) => {
