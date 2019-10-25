@@ -83,7 +83,7 @@ module.exports = {
                 recruiter.companyName = data.companyName;
                 console.log(recruiter.first_name);
                 
-                return user.save();
+                return recruiter.save();
             })
             .then(result => res.json(result))
             .catch(err => res.json(err));

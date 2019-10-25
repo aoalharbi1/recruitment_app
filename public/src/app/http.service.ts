@@ -33,11 +33,10 @@ export class HttpService {
     return this.http.get('/user/jobs');
   }
   recruitersById(){
-    //ما عرفت اجيب الايدي  حق اليوزر
-    return this.http.get('/recruiter/?_id=5db161554ba96c2da4c07e21' );
+    return this.http.get('/recruiter' );
   }
   updateRecruitersById(rec){
-    // console.log(rec , "http");
+    console.log(rec , "http");
     return this.http.put('/recruiter', rec );
   }
 }
