@@ -7,36 +7,12 @@ import { HttpService } from '../../../http.service';
   styleUrls: ['./edit-profile.component.css']
 })
 export class EditProfileComponent implements OnInit {
-  recruiter: any;
-  updated: any;
+
   constructor(private http: HttpService) {
 
   }
   ngOnInit() {
-    this.recruiter = localStorage;
-    this.updated = {
-      _id: "",
-      first_name: "",
-      last_name: "",
-      email: "",
-      companyName: "",
-      website: ""
-    };
-  }
     
-  // getRecruitersById() {
-  //   let observable = this.http.recruitersById();
-  //   observable.subscribe(data => {
-  //     this.recruiter = data;
-  //     // console.log(this.recruiter);
-  //   });
-  // }
-
-  updateRecruiter() {
-
-
-    let observable = this.http.updateRecruitersById(this.recruiter);
-    observable.subscribe(res => {});
   }
 
 }
