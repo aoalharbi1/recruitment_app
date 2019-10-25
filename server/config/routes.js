@@ -69,7 +69,7 @@ module.exports = function (app) {
         recruiters.create(req, res);
     });
 
-    app.put('/recruiter', verifyToken, (req, res) => {
+    app.put('/recruiter',  (req, res) => {
         recruiters.update(req, res);
     });
 

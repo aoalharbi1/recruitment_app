@@ -72,7 +72,8 @@ module.exports = {
 
     update: (req, res) => {
         const data = req.body;
-
+        // console.log(data._id , data.first_name);
+        
         Recruiter.findOne({ _id: data._id })
             .then(recruiter => {
                 recruiter.first_name = data.first_name;
@@ -80,7 +81,8 @@ module.exports = {
                 recruiter.email = data.email;
                 recruiter.website = data.website;
                 recruiter.companyName = data.companyName;
-
+                console.log(recruiter.first_name);
+                
                 return user.save();
             })
             .then(result => res.json(result))

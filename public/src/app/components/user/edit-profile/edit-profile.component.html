@@ -1,1 +1,62 @@
-<p>edit-profile works!</p>
+<!-- <p>edit-profile works!</p> -->
+<div class="card-body px-lg-5 py-lg-5">
+    <h6>Recruiter</h6>
+        <form role="form">
+            <div class="form-group mb-3">
+                <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-single-02"></i></span>
+                    </div>
+                    <input class="form-control" placeholder="First Name" name="first_name" type="text" value="{{recruiter.first_name}}" [(ngModel)]="recruiter.first_name" >
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-single-02"></i></span>
+                    </div>
+                    <input class="form-control" placeholder="Last Name" name="last_name" type="text" value="{{recruiter.last_name}}"  [(ngModel)]="recruiter.last_name">
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                    </div>
+                    <input class="form-control" placeholder="Email" name="email" type="email" value="{{recruiter.email}}" [(ngModel)]="recruiter.email">
+                </div>
+            </div>
+            <!-- <div class="form-group">
+                <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                    </div>
+                    <input class="form-control" placeholder="Password" name="password" type="password" >
+                </div>
+            </div> -->
+
+
+            <div class="form-group">
+                <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-building"></i></span>
+                    </div>
+                    <input class="form-control" placeholder="Company Name" name="companyName" type="text" value="{{recruiter.companyName}}" [(ngModel)]="recruiter.companyName">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-world-2"></i></span>
+                    </div>
+                    <input class="form-control" placeholder="Website" name="website" type="text" value="{{recruiter.website}}" [(ngModel)]="recruiter.website">
+                </div>
+            </div>
+            <div class="text-center">
+                <input type="hidden" name="id" value="{{recruiter._id}}" [(ngModel)]="recruiter._id" >
+                <h1>{{recruiter._id}}</h1>
+                <button type="button" class="btn btn-primary my-4" (click)='updateRecruiter(recruiter._id)'>Edit</button>
+            </div>
+        </form>
+    </div>
