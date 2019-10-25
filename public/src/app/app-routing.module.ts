@@ -12,6 +12,7 @@ import { AuthGuard } from './auth.guard';
 import { UserComponent } from './components/user/user.component';
 import { EditProfileComponent } from './components/user/edit-profile/edit-profile.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { EditRecruiterComponent } from './components/recruiter/edit-recruiter/edit-recruiter.component'
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'displayjobs', component: UserComponent }, // landing page for job seekers
   { path: 'editprofile', component: EditProfileComponent }, // edit profile page for job seekers
+  { path: "edit_recruiter", component: EditRecruiterComponent},
   { path: 'jobdetails', component: JobComponent }, //  job details page for job seekers
   { path: 'admin', component: AdminComponent }
 ];

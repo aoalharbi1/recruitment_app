@@ -35,6 +35,7 @@ import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { InteractionService } from './interaction.service';
+import { EditRecruiterComponent } from './components/recruiter/edit-recruiter/edit-recruiter.component';
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import { InteractionService } from './interaction.service';
     AsRecruiterComponent,
     AsRecruiterRegComponent,
     AsUserRegComponent,
+    EditRecruiterComponent,
   ],
   imports: [
     BrowserModule,

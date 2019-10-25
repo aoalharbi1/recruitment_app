@@ -35,6 +35,8 @@ export class NavbarComponent implements OnInit {
           localStorage.setItem('last_name', data.last_name);
           localStorage.setItem('email', data.email);
           localStorage.setItem('_id', data._id);
+          localStorage.setItem('website', data.website);
+          localStorage.setItem('companyName', data.companyName);
         }
       );
   }
