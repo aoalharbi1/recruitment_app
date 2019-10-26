@@ -40,42 +40,42 @@ module.exports = function (app) {
 
     app.post('/job', verifyToken, (req, res) => {
         if (!req.session.recruiter)
-            return res.redirect("/unauthorized");   
+            return res.status(401).send('Unauthorized request');
 
         jobs.create(req, res);
     });
 
     app.put('/job', verifyToken, (req, res) => {
         if (!req.session.recruiter)
-            return res.redirect("/unauthorized");
+            return res.status(401).send('Unauthorized request');
 
         jobs.update(req, res);
     });
 
     app.delete('/job', verifyToken, (req, res) => {
         if (!req.session.recruiter)
-            return res.redirect("/unauthorized");
-            
+            return res.status(401).send('Unauthorized request');
+
         jobs.remove(req, res);
     });
 
     app.post('/job/user/applied', verifyToken, (req, res) => {
         if (!req.session.jobSeeker)
-            return res.redirect("/unauthorized");
-            
+            return res.status(401).send('Unauthorized request');
+
         jobs.userApplied(req, res);
     });
 
     // *********************** Recruiter routes ***********************
     app.get('/recruiters', verifyToken, (req, res) => {
         if (!req.session.admin)
-            return res.redirect("/unauthorized");
+            return res.status(401).send('Unauthorized request');
 
         recruiters.getAll(req, res);
     });
     app.get('/recruiter', verifyToken, (req, res) => {
         if (!req.session.admin)
-            return res.redirect("/unauthorized");
+            return res.status(401).send('Unauthorized request');
 
         recruiters.getById(req, res);
     });
@@ -86,14 +86,14 @@ module.exports = function (app) {
 
     app.put('/recruiter', verifyToken, (req, res) => {
         if (!req.session.recruiter)
-            return res.redirect("/unauthorized");
+            return res.status(401).send('Unauthorized request');
 
         recruiters.update(req, res);
     });
 
     app.delete('/recruiter', verifyToken, (req, res) => {
         if (!req.session.admin)
-            return res.redirect("/unauthorized");
+            return res.status(401).send('Unauthorized request');
 
         recruiters.remove(req, res);
     });
@@ -101,7 +101,7 @@ module.exports = function (app) {
     // 127.0.0.1:8000/recruiter/jobs/?_id=5daf17d53d379b26336928c8
     app.get('/recruiter/jobs', verifyToken, (req, res) => {
         if (req.session.recruiter)
-            return res.redirect("/unauthorized");
+            return res.status(401).send('Unauthorized request');
 
         recruiters.displayJobs(req, res);
     });
@@ -113,14 +113,14 @@ module.exports = function (app) {
     // *********************** JobSeeker routes ***********************
     app.get('/users', verifyToken, (req, res) => {
         if (!req.session.admin)
-            return res.redirect("/unauthorized");
+            return res.status(401).send('Unauthorized request');
 
         jobSeekers.getAll(req, res);
     });
 
     app.get('/user', verifyToken, (req, res) => {
         if (!req.session.admin)
-            return res.redirect("/unauthorized");
+            return res.status(401).send('Unauthorized request');
 
         jobSeekers.getById(req, res);
     });
@@ -131,14 +131,14 @@ module.exports = function (app) {
 
     app.put('/user', verifyToken, (req, res) => {
         if (!req.session.jobSeeker)
-            return res.redirect("/unauthorized");
+            return res.status(401).send('Unauthorized request');
 
         jobSeekers.update(req, res);
     });
 
     app.delete('/user', verifyToken, (req, res) => {
         if (req.session.admin)
-            return res.redirect("/unauthorized");
+            return res.status(401).send('Unauthorized request');
 
         jobSeekers.remove(req, res);
     });
@@ -146,7 +146,7 @@ module.exports = function (app) {
     //user applied for a job
     app.put('/user/applied', verifyToken, (req, res) => {
         if (!req.session.jobSeeker)
-            return res.redirect("/unauthorized");
+            return res.status(401).send('Unauthorized request');
 
         jobSeekers.AppliedForJob(req, res);
     });
@@ -158,7 +158,7 @@ module.exports = function (app) {
     // view the jobs from the jobSeeker
     app.get('/user/jobs', verifyToken, (req, res) => {
         if (!req.session.jobSeeker)
-            return res.redirect("/unauthorized");
+            return res.status(401).send('Unauthorized request');
 
         jobSeekers.displayJobs(req, res);
     });
@@ -166,14 +166,14 @@ module.exports = function (app) {
     // *********************** Admin routes ***********************
     app.get('/admin/recruiters', verifyToken, (req, res) => {
         if (!req.session.admin)
-            return res.redirect("/unauthorized");
+            return res.status(401).send('Unauthorized request');
 
         admin.getAll(req, res);
     });
 
     app.put('/admin/activate', verifyToken, (req, res) => {
         if (!req.session.admin)
-            return res.redirect("/unauthorized");
+            return res.status(401).send('Unauthorized request');
 
         admin.activateOrDeactivate(req, res);
     });
@@ -181,15 +181,15 @@ module.exports = function (app) {
     app.post('/admin/login', (req, res) => {
         admin.login(req, res);
     });
-    
+
     // for testing, this will create and admin account
-    app.post('/admin', (res,req)=> {
+    app.post('/admin', (res, req) => {
         admin.create(req, res);
     });
 
     app.get('/sign_out', (req, res) => {
         req.session.destroy();
-        
+
         return res.json("signed out");
     });
 

@@ -42,7 +42,7 @@ export class AsRecruiterComponent implements OnInit {
           this.recruiterData.password = "";
           localStorage.setItem('token', res.token);
           this._interactionService.notify(res);
-          this._router.navigate(['/findjob']);
+          this._router.navigate(['/']);
         },
         err => console.log(err)
 

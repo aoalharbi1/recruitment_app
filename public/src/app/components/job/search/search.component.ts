@@ -12,13 +12,13 @@ export class SearchComponent implements OnInit {
 
   jobs: any;
   jobData: any;
-  
-  searchText
-  City
-  lvl
-  field
-  
-  
+  isRecruiter: boolean;
+  searchText: any;
+  City: any;
+  lvl: any;
+  field: any;
+
+
   constructor(
     private http: HttpService,
     private _router: Router,
@@ -32,13 +32,16 @@ export class SearchComponent implements OnInit {
     };
 
     this.getJobs();
-
   }
 
   getJobs() {
     let observable = this.http.getJobs();
     observable.subscribe(data => {
       this.jobs = data;
+
+      if (localStorage.getItem('recruiter')) {
+        this.isRecruiter = true;
+      }
     });
   }
 
@@ -59,12 +62,12 @@ export class SearchComponent implements OnInit {
     });
   }
 
-  placeFun(word){
-    this.searchText=word
+  placeFun(word) {
+    this.searchText = word
     console.log(this.searchText)
   }
 
- 
+
 
 }
 

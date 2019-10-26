@@ -36,14 +36,23 @@ export class NavbarComponent implements OnInit {
           localStorage.setItem('last_name', data.last_name);
           localStorage.setItem('email', data.email);
           localStorage.setItem('_id', data._id);
-          localStorage.setItem('gender', data.info.gender);
-          localStorage.setItem('phone', data.info.phone);
-          localStorage.setItem('city', data.info.city);
-          localStorage.setItem('gpa', data.info.gpa);
-          localStorage.setItem('university', data.info.university);
-          localStorage.setItem('major', data.info.major);
-          localStorage.setItem('education', data.info.education);
-          localStorage.setItem('dateOfBirth', data.info.dateOfBirth);
+
+          if (data.jobSeeker) {
+            localStorage.setItem('gender', data.info.gender);
+            localStorage.setItem('phone', data.info.phone);
+            localStorage.setItem('city', data.info.city);
+            localStorage.setItem('gpa', data.info.gpa);
+            localStorage.setItem('university', data.info.university);
+            localStorage.setItem('major', data.info.major);
+            localStorage.setItem('education', data.info.education);
+            localStorage.setItem('dateOfBirth', data.info.dateOfBirth);
+          }
+
+          if (data.recruiter) {
+            localStorage.setItem('companyName', data.companyName);
+            localStorage.setItem('website', data.website);
+            localStorage.setItem('recruiter', 'true');
+          }
 
           if (data.admin) {
             this.admin = true;
