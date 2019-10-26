@@ -43,4 +43,8 @@ export class HttpService {
   updateUser(user) {
     return this.http.put('/user', user);
   }
+
+  postNewJob(boy) {
+    return this.http.post('/job' , boy);
+  }
 }
