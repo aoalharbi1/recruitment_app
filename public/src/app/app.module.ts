@@ -36,6 +36,7 @@ import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { InteractionService } from './interaction.service';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { EditRecruiterComponent } from './components/recruiter/edit-recruiter/edit-recruiter.component';
 
 
 
@@ -61,6 +62,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     AsRecruiterComponent,
     AsRecruiterRegComponent,
     AsUserRegComponent,
+    EditRecruiterComponent,
   ],
   imports: [
     BrowserModule,
