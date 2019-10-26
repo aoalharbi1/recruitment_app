@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../../http.service'
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search',
@@ -11,6 +12,13 @@ export class SearchComponent implements OnInit {
 
   jobs: any;
   jobData: any;
+  
+  searchText
+  City
+  lvl
+  field
+  
+  
   constructor(
     private http: HttpService,
     private _router: Router,
@@ -24,6 +32,7 @@ export class SearchComponent implements OnInit {
     };
 
     this.getJobs();
+
   }
 
   getJobs() {
@@ -49,4 +58,15 @@ export class SearchComponent implements OnInit {
       }
     });
   }
+
+  placeFun(word){
+    this.searchText=word
+    console.log(this.searchText)
+  }
+
+ 
+
 }
+
+
+
