@@ -34,6 +34,9 @@ import { AsUserRegComponent } from './components/main/register/as-user/as-user-r
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './token-interceptor.service';
+import { InteractionService } from './interaction.service';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 
 
 @NgModule({
@@ -63,9 +66,10 @@ import { TokenInterceptorService } from './token-interceptor.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    Ng2SearchPipeModule,
   ],
-  providers: [HttpService, AuthService, AuthGuard,
+  providers: [HttpService, AuthService, InteractionService, AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../../http.service'
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search',
@@ -9,45 +10,63 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 export class SearchComponent implements OnInit {
 
-  jobs: any
-  jobData: any = {
+  jobs: any;
+  jobData: any;
+  
+  searchText
+  City
+  lvl
+  field
+  
+  
+  constructor(
+    private http: HttpService,
+    private _router: Router,
+  ) {
 
   }
-  constructor(private http: HttpService) {
-
-   }
 
   ngOnInit() {
-
     this.jobData = {
       _id: ""
-    }
-    this.getJobs()
+    };
 
+    this.getJobs();
 
-    console.log('getting data', this.jobs)
   }
 
   getJobs() {
-    let observable = this.http.getJobs()
+    let observable = this.http.getJobs();
     observable.subscribe(data => {
       this.jobs = data;
     });
   }
 
-  userApplied(id){
-    this.jobData._id = id;
-    // this.http.getJobs()
-    let observable = this.http.userApplied(this.jobData);
-    observable.subscribe(res  => {
-      console.log(res)
+  userApplied(job) {
+    if (!localStorage.getItem('token')) {
+      return this._router.navigate(['/login']);
     }
-    // err => console.log(err)
 
-    )
+    let observable = this.http.userApplied(job);
+    observable.subscribe(res => {
+      console.log(res);
 
+      if (res === 1) {
+        job.applied = true;
+      } else if (res === 0) {
+        job.applied = false;
+      }
+    });
   }
 
+  placeFun(word){
+    this.searchText=word
+    console.log(this.searchText)
+  }
 
+ 
 
 }
+
+
+
