@@ -88,7 +88,7 @@ module.exports = {
                 return user.save();
             })
             .then(result => res.json(result))
-            .catch(err => res.json("err"));
+            .catch(err => res.json(err));
     },
 
     remove: (req, res) => {
