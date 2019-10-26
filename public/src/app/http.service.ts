@@ -29,8 +29,8 @@ export class HttpService {
   sign_out() {
     return this.http.get('/sign_out');
   }
-  appliedUsers() {
 
+  appliedJobs() {
     return this.http.get('/user/jobs');
   }
   recruitersById() {
