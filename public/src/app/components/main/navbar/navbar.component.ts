@@ -12,7 +12,10 @@ export class NavbarComponent implements OnInit {
 
   is_login: boolean
   admin: boolean = false;
+  jobSeeker: boolean = false;
+  recruiter: boolean = false;
   userData: any;
+
   constructor(
     private _interactionService: InteractionService,
     private _http: HttpService,
@@ -38,6 +41,10 @@ export class NavbarComponent implements OnInit {
           localStorage.setItem('_id', data._id);
 
           if (data.jobSeeker) {
+            this.jobSeeker = true;
+            this.recruiter = false;
+            this.admin = false;
+
             localStorage.setItem('gender', data.info.gender);
             localStorage.setItem('phone', data.info.phone);
             localStorage.setItem('city', data.info.city);
@@ -49,12 +56,18 @@ export class NavbarComponent implements OnInit {
           }
 
           if (data.recruiter) {
+            this.recruiter = true;
+            this.jobSeeker = false;
+            this.admin = false;
+
             localStorage.setItem('companyName', data.companyName);
             localStorage.setItem('website', data.website);
             localStorage.setItem('recruiter', 'true');
           }
 
           if (data.admin) {
+            this.recruiter = false;
+            this.jobSeeker = false;
             this.admin = true;
           }
         }
