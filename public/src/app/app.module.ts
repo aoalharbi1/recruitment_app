@@ -37,6 +37,7 @@ import { TokenInterceptorService } from './token-interceptor.service';
 import { InteractionService } from './interaction.service';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { EditRecruiterComponent } from './components/recruiter/edit-recruiter/edit-recruiter.component';
+import { PostJobComponent } from './components/recruiter/post-job/post-job.component';
 
 
 
@@ -63,6 +64,7 @@ import { EditRecruiterComponent } from './components/recruiter/edit-recruiter/ed
     AsRecruiterRegComponent,
     AsUserRegComponent,
     EditRecruiterComponent,
+    PostJobComponent,
   ],
   imports: [
     BrowserModule,
