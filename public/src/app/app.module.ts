@@ -35,6 +35,8 @@ import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { InteractionService } from './interaction.service';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 
 
 @NgModule({
@@ -64,7 +66,8 @@ import { InteractionService } from './interaction.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    Ng2SearchPipeModule,
   ],
   providers: [HttpService, AuthService, InteractionService, AuthGuard,
     {
