@@ -30,6 +30,7 @@ export class HttpService {
     return this.http.get('/sign_out');
   }
   appliedUsers() {
+
     return this.http.get('/user/jobs');
   }
   recruitersById() {
@@ -40,8 +41,7 @@ export class HttpService {
     return this.http.put('/recruiter', rec);
   }
 
-  updateUsersById(user) {
-    console.log(user, "http");
+  updateUser(user) {
     return this.http.put('/user', user);
   }
 }

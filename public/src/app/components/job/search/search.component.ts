@@ -40,6 +40,8 @@ export class SearchComponent implements OnInit {
 
     let observable = this.http.userApplied(job);
     observable.subscribe(res => {
+      console.log(res);
+
       if (res === 1) {
         job.applied = true;
       } else if (res === 0) {

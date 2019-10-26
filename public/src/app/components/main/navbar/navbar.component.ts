@@ -43,6 +43,7 @@ export class NavbarComponent implements OnInit {
           localStorage.setItem('university', data.info.university);
           localStorage.setItem('major', data.info.major);
           localStorage.setItem('education', data.info.education);
+          localStorage.setItem('dateOfBirth', data.info.dateOfBirth);
 
           if (data.admin) {
             this.admin = true;

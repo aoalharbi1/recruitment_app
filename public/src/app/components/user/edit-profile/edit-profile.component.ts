@@ -18,38 +18,14 @@ export class EditProfileComponent implements OnInit {
   }
   ngOnInit() {
     this.user = localStorage;
-    this.updated = {
-      _id: "",
-      first_name: "",
-      last_name: "",
-      email: "",
-      major: "",
-      gpa: "",
-      gender: "",
-      education: "",
-      city: "",
-      phone: "",
-      university: "",
-    };
   }
 
-  // getRecruitersById() {
-  //   let observable = this.http.recruitersById();
-  //   observable.subscribe(data => {
-  //     this.recruiter = data;
-  //     // console.log(this.recruiter);
-  //   });
-  // }
-
   updateUser() {
+    let observable = this.http.updateUser(this.user);
+    observable.subscribe(res => {
+      console.log(res);
 
-    console.log(this.user);
-
-    let observable = this.http.updateUsersById(this.user);
-    observable.subscribe(res => { 
-      console.log("111", res);
-      alert("Profile Successfully Changed");
-      this._router.navigate(['/displayjobs']);
+      this._router.navigate(['/editprofile']);
     });
   }
 

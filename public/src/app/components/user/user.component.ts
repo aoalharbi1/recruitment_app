@@ -12,13 +12,12 @@ export class UserComponent implements OnInit {
   constructor(private http: HttpService) { }
 
   ngOnInit() {
-    this.getAppliedUsers();
+    this.getAppliedJobs();
   }
 
-  getAppliedUsers() {
-    let observable = this.http.appliedUsers();
+  getAppliedJobs() {
+    let observable = this.http.appliedJobs();
     observable.subscribe(data => {
-      console.log(data);
       this.appliedJobs = data;
     });
   }
