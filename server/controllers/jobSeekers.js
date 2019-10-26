@@ -58,6 +58,8 @@ module.exports = {
                     last_name: savedResult.last_name,
                     email: savedResult.email,
                     info: savedResult.info,
+                    dateOfBirth: savedResult.dateOfBirth,
+                    jobSeeker: true,
                     token: token
                 }
 
@@ -83,7 +85,9 @@ module.exports = {
                 user.info.education = data.education;
                 user.info.link = data.link;
                 user.info.gpa = data.gpa;
-                user.info.dateOfBirth = data.dateOfBirth;
+                if(user.info.dateOfBirth != data.dateOfBirth){
+                    user.info.dateOfBirth = data.dateOfBirth;
+                }
 
                 return user.save();
             })
@@ -131,6 +135,7 @@ module.exports = {
                             email: jobSeeker.email,
                             info: jobSeeker.info,
                             jobs: jobSeeker.jobs,
+                            jobSeeker: true,
                             token: token
                         }
 

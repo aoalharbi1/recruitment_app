@@ -16,7 +16,6 @@ export class EditRecruiterComponent implements OnInit {
   }
 
   updateRecruiter() {
-
     console.log(this.recruiter);
 
     let observable = this.http.updateRecruitersById(this.recruiter);

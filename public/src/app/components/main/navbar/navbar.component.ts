@@ -12,7 +12,10 @@ export class NavbarComponent implements OnInit {
 
   is_login: boolean
   admin: boolean = false;
+  jobSeeker: boolean = false;
+  recruiter: boolean = false;
   userData: any;
+
   constructor(
     private _interactionService: InteractionService,
     private _http: HttpService,
@@ -25,6 +28,20 @@ export class NavbarComponent implements OnInit {
     } else {
       this.is_login = true;
       this.userData = localStorage;
+
+      if (localStorage.getItem('recruiter')) {
+        this.recruiter = true;
+        this.jobSeeker = false;
+        this.admin = false;
+      } else if (localStorage.getItem('jobSeeker')) {
+        this.jobSeeker = true;
+        this.recruiter = false;
+        this.admin = false;
+      } else if (localStorage.getItem('admin')) {
+        this.admin = true;
+        this.recruiter = false;
+        this.jobSeeker = false;
+      }
     }
     this._interactionService.login$
       .subscribe(
@@ -36,17 +53,38 @@ export class NavbarComponent implements OnInit {
           localStorage.setItem('last_name', data.last_name);
           localStorage.setItem('email', data.email);
           localStorage.setItem('_id', data._id);
-          localStorage.setItem('gender', data.info.gender);
-          localStorage.setItem('phone', data.info.phone);
-          localStorage.setItem('city', data.info.city);
-          localStorage.setItem('gpa', data.info.gpa);
-          localStorage.setItem('university', data.info.university);
-          localStorage.setItem('major', data.info.major);
-          localStorage.setItem('education', data.info.education);
-          localStorage.setItem('dateOfBirth', data.info.dateOfBirth);
+
+          if (data.jobSeeker) {
+            this.jobSeeker = true;
+            this.recruiter = false;
+            this.admin = false;
+
+            localStorage.setItem('gender', data.info.gender);
+            localStorage.setItem('phone', data.info.phone);
+            localStorage.setItem('city', data.info.city);
+            localStorage.setItem('gpa', data.info.gpa);
+            localStorage.setItem('university', data.info.university);
+            localStorage.setItem('major', data.info.major);
+            localStorage.setItem('education', data.info.education);
+            localStorage.setItem('dateOfBirth', data.info.dateOfBirth);
+            localStorage.setItem('jobSeeker', 'true');
+          }
+
+          if (data.recruiter) {
+            this.recruiter = true;
+            this.jobSeeker = false;
+            this.admin = false;
+
+            localStorage.setItem('companyName', data.companyName);
+            localStorage.setItem('website', data.website);
+            localStorage.setItem('recruiter', 'true');
+          }
 
           if (data.admin) {
+            this.recruiter = false;
+            this.jobSeeker = false;
             this.admin = true;
+            localStorage.setItem('admin', 'true');
           }
         }
       );

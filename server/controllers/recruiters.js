@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 
 module.exports = {
     getAll: (req, res) => {
-        Recruiter.find({}, {'password': 0})
+        Recruiter.find({}, { 'password': 0 })
             .then(users => res.json(users))
             .catch(err => res.json(err));
     },
@@ -49,7 +49,7 @@ module.exports = {
                 return Recruiter.create(newRecruiter);
             })
             .then(savedResult => {
-                
+
                 let payload = { subject: savedResult._id }
                 let token = jwt.sign(payload, 'ThisIsSecret');
 
@@ -62,10 +62,11 @@ module.exports = {
                     website: savedResult.website,
                     active: savedResult.active,
                     jobs: savedResult.jobs,
+                    recruiter: true,
                     token: token
                 }
                 res.json(req.session.recruiter);
-                
+
             })
             .catch(err => res.json(err));
     },
@@ -73,7 +74,7 @@ module.exports = {
     update: (req, res) => {
         const data = req.body;
 
-        Recruiter.findOne({ _id: data._id })
+        Recruiter.findOne({ _id: data._id }, { 'password': 0 })
             .then(recruiter => {
                 recruiter.first_name = data.first_name;
                 recruiter.last_name = data.last_name;
@@ -96,6 +97,7 @@ module.exports = {
     login: (req, res) => {
         Recruiter.findOne({ email: req.body.email })
             .then(async recruiter => {
+                
                 if (recruiter === null) {
                     return res.json("User not found!");
                 }
@@ -113,6 +115,7 @@ module.exports = {
                             companyName: recruiter.companyName,
                             jobs: recruiter.jobs,
                             active: recruiter.active,
+                            recruiter: true,
                             token: token
                         }
                         
@@ -125,22 +128,22 @@ module.exports = {
                 }
             })
             .catch(err => res.json(err));
-        },
-        // this function the recruiter can see all jobs posted by him 
-        // this simple ~ to get only the field written after ~ 
-        displayJobs: (req, res) => {
-            Recruiter.find({ _id: req.query._id }, '~ jobs ')
-                .then(data => res.json(data))
-                .catch(err => res.json(err))
-        },
-        // this function the recruiter can see all jobs posted by him 
-        // this simple ~ to get only the field written after ~ 
-        displayJobs: (req, res) => {
-            Recruiter.find({ _id: req.query._id }, '~ jobs ')
-                .then(data => res.json(data))
-                .catch(err => res.json(err))
-    
-        }
+    },
+    // this function the recruiter can see all jobs posted by him 
+    // this simple ~ to get only the field written after ~ 
+    displayJobs: (req, res) => {
+        Recruiter.find({ _id: req.query._id }, '~ jobs ')
+            .then(data => res.json(data))
+            .catch(err => res.json(err))
+    },
+    // this function the recruiter can see all jobs posted by him 
+    // this simple ~ to get only the field written after ~ 
+    displayJobs: (req, res) => {
+        Recruiter.find({ _id: req.query._id }, '~ jobs ')
+            .then(data => res.json(data))
+            .catch(err => res.json(err))
 
     }
+
+}
 
