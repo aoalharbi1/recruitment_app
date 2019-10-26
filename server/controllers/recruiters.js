@@ -118,7 +118,7 @@ module.exports = {
                             recruiter: true,
                             token: token
                         }
-
+                        
                         return res.json(req.session.recruiter);
                     }
                     return Promise.reject("Error: password is incorrect")

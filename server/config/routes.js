@@ -39,6 +39,8 @@ module.exports = function (app) {
     });
 
     app.post('/job', verifyToken, (req, res) => {
+        console.log(req.session.recruiter);
+        
         if (!req.session.recruiter)
             return res.status(401).send('Unauthorized request');
 

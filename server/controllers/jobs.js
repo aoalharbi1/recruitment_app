@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 const Job = mongoose.model('Job');
+const Recruiter = mongoose.model('Recruiter');
 const JobSeeker = mongoose.model('JobSeeker');
 
 module.exports = {
     getAll: (req, res) => {
-        Job.find({}, {'applied_users': 0})
+        Job.find({}, { 'applied_users': 0 })
             .then(jobs => res.json(jobs))
             .catch(err => res.json(err));
     },
@@ -18,7 +19,12 @@ module.exports = {
     create: (req, res) => {
         const job = req.body;
         Job.create(job)
-            .then(result => res.json(result))
+            .then(result => {
+                const recruiter = req.session.recruiter;
+
+                return Recruiter.findOneAndUpdate({ _id: recruiter._id }, { $push: { jobs: result } }, { new: true })
+            })
+            .then(result => res.json(true))
             .catch(err => res.json(err));
     },
 
