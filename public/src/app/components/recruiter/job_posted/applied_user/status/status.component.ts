@@ -7,9 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StatusComponent implements OnInit {
 
-  constructor() { }
+  status:string //applied  // inter //cont
+
+  CheckerValue:number
+
+  constructor() { 
+    this.status='cont'
+  }
 
   ngOnInit() {
+  }
+
+  statusChecker(){
+    if (this.status=='applied'){
+      
+    }
   }
 
 }
