@@ -69,24 +69,26 @@ module.exports = {
     update: (req, res) => {
         const data = req.body;
 
-        JobSeeker.findOne({ _id: data._id })
+
+        JobSeeker.findOne({ _id: data._id }, { jobs: 0 })
             .then(user => {
                 user.first_name = data.first_name;
                 user.last_name = data.last_name;
                 user.email = data.email;
-                user.info.dateOfBirth = data.info.dateOfBirth;
-                user.info.gender = data.info.gender;
-                user.info.phone = data.info.phone;
-                user.info.city = data.info.city;
-                user.info.university = data.info.university;
-                user.info.major = data.info.major;
-                user.info.education = data.info.education;
-                user.info.link = data.info.link;
+                user.info.gender = data.gender;
+                user.info.phone = data.phone;
+                user.info.city = data.city;
+                user.info.university = data.university;
+                user.info.major = data.major;
+                user.info.education = data.education;
+                user.info.link = data.link;
+                user.info.gpa = data.gpa;
+                user.info.dateOfBirth = data.dateOfBirth;
 
                 return user.save();
             })
             .then(result => res.json(result))
-            .catch(err => res.json(err));
+            .catch(err => res.json("err"));
     },
 
     remove: (req, res) => {
@@ -144,8 +146,9 @@ module.exports = {
     },
 
     displayJobs: (req, res) => {
-        JobSeeker.find({ _id: req.query._id }, '~ jobs')
-            .then(jobs => res.json(jobs))
+        const id = req.session.jobSeeker._id; // getting the _id from the session
+        JobSeeker.findOne({ _id: id }, '~ jobs')
+            .then(data => res.json(data.jobs)) // this will return the jobs only
             .catch(err => res.json(err));
     },
 }

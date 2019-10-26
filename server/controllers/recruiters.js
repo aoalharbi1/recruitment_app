@@ -81,7 +81,7 @@ module.exports = {
                 recruiter.website = data.website;
                 recruiter.companyName = data.companyName;
 
-                return user.save();
+                return recruiter.save();
             })
             .then(result => res.json(result))
             .catch(err => res.json(err));

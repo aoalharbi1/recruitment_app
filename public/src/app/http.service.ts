@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +30,18 @@ export class HttpService {
     return this.http.get('/sign_out');
   }
 
-  appliedUsers() {
+  appliedJobs() {
     return this.http.get('/user/jobs');
+  }
+  recruitersById() {
+    return this.http.get('/recruiter');
+  }
+  updateRecruitersById(rec) {
+    console.log(rec, "http");
+    return this.http.put('/recruiter', rec);
+  }
+
+  updateUser(user) {
+    return this.http.put('/user', user);
   }
 }

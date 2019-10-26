@@ -90,6 +90,7 @@
           {{job.company}}
         </h6>
         <p class="card-text">{{ job.description }}</p>
+        
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
           View More information
@@ -126,6 +127,11 @@
             </div>
           </div>
         </div>
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+          View More information
+        </button>
+
         <a *ngIf="job.applied == undefined" class="btn btn-info" (click)="userApplied(job)">Apply</a>
         <a *ngIf="job.applied" class="btn btn-success" (click)="userApplied(job)">Applied</a>
         <a *ngIf="job.applied == false" class="btn btn-warning" (click)="userApplied(job)">You already applied for this
