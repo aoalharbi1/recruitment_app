@@ -28,6 +28,20 @@ export class NavbarComponent implements OnInit {
     } else {
       this.is_login = true;
       this.userData = localStorage;
+
+      if (localStorage.getItem('recruiter')) {
+        this.recruiter = true;
+        this.jobSeeker = false;
+        this.admin = false;
+      } else if (localStorage.getItem('jobSeeker')) {
+        this.jobSeeker = true;
+        this.recruiter = false;
+        this.admin = false;
+      } else if (localStorage.getItem('admin')) {
+        this.admin = true;
+        this.recruiter = false;
+        this.jobSeeker = false;
+      }
     }
     this._interactionService.login$
       .subscribe(
@@ -53,6 +67,7 @@ export class NavbarComponent implements OnInit {
             localStorage.setItem('major', data.info.major);
             localStorage.setItem('education', data.info.education);
             localStorage.setItem('dateOfBirth', data.info.dateOfBirth);
+            localStorage.setItem('jobSeeker', 'true');
           }
 
           if (data.recruiter) {
@@ -69,6 +84,7 @@ export class NavbarComponent implements OnInit {
             this.recruiter = false;
             this.jobSeeker = false;
             this.admin = true;
+            localStorage.setItem('admin', 'true');
           }
         }
       );
