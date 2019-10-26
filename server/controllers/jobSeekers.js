@@ -85,7 +85,7 @@ module.exports = {
                 user.info.education = data.education;
                 user.info.link = data.link;
                 user.info.gpa = data.gpa;
-                if(user.info.dateOfBirth != data.dateOfBirth){
+                if (user.info.dateOfBirth != data.dateOfBirth) {
                     user.info.dateOfBirth = data.dateOfBirth;
                 }
 
@@ -109,12 +109,37 @@ module.exports = {
 
         const job = req.body;
         const jobSeeker = req.session.jobSeeker;
+        const appliedUser = {
+            first_name: jobSeeker.first_name,
+            last_name: jobSeeker.last_name,
+            email: jobSeeker.email,
+            info: {
+                gender: jobSeeker.info.gender,
+                phone: jobSeeker.info.phone,
+                city: jobSeeker.info.city,
+                gpa: jobSeeker.info.gpa,
+                university: jobSeeker.info.university,
+                major: jobSeeker.info.major,
+                education: jobSeeker.info.education,
+                link: jobSeeker.info.link
+            }
+        }
 
         JobSeeker.updateOne({ _id: jobSeeker._id, 'jobs._id': { $ne: job._id } }, { $addToSet: { jobs: job } }, { new: true })
             .then(result => {
-                res.json(result.n);
+                
+                if (result.n > 0) {
+                    return Job.updateOne({ _id: job._id, 'applied_users._id': { $ne: jobSeeker._id } }, { $addToSet: { applied_users: appliedUser } }, { new: true })
+                }
+                else {
+                    const value = {
+                        n: 0
+                    }
+                    return Promise.resolve(value)
+                }
             })
-            .catch(err => res.json(err));
+            .then(result => res.json(result.n))
+            .catch(err => res.json(false));
     },
 
     login: (req, res) => {

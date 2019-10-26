@@ -21,7 +21,8 @@ export class PostJobComponent implements OnInit {
       field:"",
       city:"",
       type:"",
-      company:""
+      company:"",
+      recruiter: localStorage.getItem('_id')
     }
 
   }

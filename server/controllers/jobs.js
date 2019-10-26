@@ -49,17 +49,5 @@ module.exports = {
         Job.deleteOne({ _id: req.query._id })
             .then(result => res.json(result))
             .catch(err => res.json(err));
-    },
-
-    // User's info must be in session, so the user could apply for jobs
-    userApplied: (req, res) => {
-        if (!req.session.jobSeeker)
-            res.json("User not signed in");
-
-        const job = req.body;
-        const jobSeeker = req.session.jobSeeker;
-        Job.findOneAndUpdate({ _id: job._id }, { $push: { applied_users: jobSeeker } }, { new: true })
-            .then(result => res.json(result))
-            .catch(err => res.json(err));
     }
 } 

@@ -10,6 +10,7 @@ const JobSchema = new mongoose.Schema(
         city: { type: String, required: true },
         type: { type: String, required: true },     // part-time
         company: { type: String, required: true },
+        recruiter: { type: String, required: true },
         applied_users: [Schema.Types.Mixed]
     },
     { timestamps: true }

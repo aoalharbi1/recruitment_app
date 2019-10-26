@@ -40,7 +40,7 @@ module.exports = function (app) {
 
     app.post('/job', verifyToken, (req, res) => {
         console.log(req.session.recruiter);
-        
+
         if (!req.session.recruiter)
             return res.status(401).send('Unauthorized request');
 
@@ -61,12 +61,6 @@ module.exports = function (app) {
         jobs.remove(req, res);
     });
 
-    app.post('/job/user/applied', verifyToken, (req, res) => {
-        if (!req.session.jobSeeker)
-            return res.status(401).send('Unauthorized request');
-
-        jobs.userApplied(req, res);
-    });
 
     // *********************** Recruiter routes ***********************
     app.get('/recruiters', verifyToken, (req, res) => {
@@ -101,9 +95,9 @@ module.exports = function (app) {
     });
     // the testing route will be something like this:
     // 127.0.0.1:8000/recruiter/jobs/?_id=5daf17d53d379b26336928c8
-    app.get('/recruiter/jobs', verifyToken, (req, res) => {
-        if (req.session.recruiter)
-            return res.status(401).send('Unauthorized request');
+    app.get('/recruiter/jobs', (req, res) => {
+        // if (req.session.recruiter)
+        //     return res.status(401).send('Unauthorized request');
 
         recruiters.displayJobs(req, res);
     });

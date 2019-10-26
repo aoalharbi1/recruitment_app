@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Recruiter = mongoose.model('Recruiter');
+const Job = mongoose.model('Job');
 const bcrypt = require('bcrypt');
 const passwordValidator = require('password-validator');
 const jwt = require('jsonwebtoken');
@@ -49,24 +50,7 @@ module.exports = {
                 return Recruiter.create(newRecruiter);
             })
             .then(savedResult => {
-
-                let payload = { subject: savedResult._id }
-                let token = jwt.sign(payload, 'ThisIsSecret');
-
-                req.session.recruiter = {
-                    _id: savedResult._id,
-                    first_name: savedResult.first_name,
-                    last_name: savedResult.last_name,
-                    email: savedResult.email,
-                    companyName: savedResult.companyName,
-                    website: savedResult.website,
-                    active: savedResult.active,
-                    jobs: savedResult.jobs,
-                    recruiter: true,
-                    token: token
-                }
-                res.json(req.session.recruiter);
-
+                res.json("Thank you for your registration, please wait until an admin activate your account ");
             })
             .catch(err => res.json(err));
     },
@@ -98,6 +82,10 @@ module.exports = {
         Recruiter.findOne({ email: req.body.email })
             .then(async recruiter => {
 
+                if (!recruiter.active) {
+                    return res.json("Recruiter has not been activated by an admin yet")
+                }
+
                 if (recruiter === null) {
                     return res.json("User not found!");
                 }
@@ -118,7 +106,7 @@ module.exports = {
                             recruiter: true,
                             token: token
                         }
-                        
+
                         return res.json(req.session.recruiter);
                     }
                     return Promise.reject("Error: password is incorrect")
@@ -129,10 +117,9 @@ module.exports = {
             })
             .catch(err => res.json(err));
     },
-    // this function the recruiter can see all jobs posted by him 
-    // this simple ~ to get only the field written after ~ 
+
     displayJobs: (req, res) => {
-        Recruiter.find({ _id: req.query._id }, '~ jobs ')
+        Job.find({ recruiter: req.session._id })
             .then(data => res.json(data))
             .catch(err => res.json(err))
     },
