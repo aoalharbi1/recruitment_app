@@ -93,11 +93,10 @@ module.exports = function (app) {
 
         recruiters.remove(req, res);
     });
-    // the testing route will be something like this:
-    // 127.0.0.1:8000/recruiter/jobs/?_id=5daf17d53d379b26336928c8
-    app.get('/recruiter/jobs', (req, res) => {
-        // if (req.session.recruiter)
-        //     return res.status(401).send('Unauthorized request');
+    
+    app.get('/recruiter/jobs', verifyToken, (req, res) => {
+        if (req.session.recruiter)
+            return res.status(401).send('Unauthorized request');
 
         recruiters.displayJobs(req, res);
     });
