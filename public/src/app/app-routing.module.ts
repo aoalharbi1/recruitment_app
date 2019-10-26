@@ -13,6 +13,7 @@ import { UserComponent } from './components/user/user.component';
 import { EditProfileComponent } from './components/user/edit-profile/edit-profile.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { EditRecruiterComponent } from './components/recruiter/edit-recruiter/edit-recruiter.component';
+import { PostJobComponent } from './components/recruiter/post-job/post-job.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
