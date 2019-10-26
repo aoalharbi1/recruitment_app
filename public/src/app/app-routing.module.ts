@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'displayjobs', component: UserComponent, canActivate: [AuthGuard] }, // landing page for job seekers
-  { path: 'editprofile', component: EditProfileComponent, canActivate: [AuthGuard] }, // edit profile page for job seeker
+  { path: 'editprofile', component: EditProfileComponent, canActivate: [AuthGuard] }, // edit profile page for job seekers
   { path: "edit_recruiter", component: EditRecruiterComponent , canActivate: [AuthGuard] },
   { path: "post_job", component: PostJobComponent , canActivate: [AuthGuard]},
 
