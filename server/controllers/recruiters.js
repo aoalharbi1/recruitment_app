@@ -97,7 +97,7 @@ module.exports = {
     login: (req, res) => {
         Recruiter.findOne({ email: req.body.email })
             .then(async recruiter => {
-                
+
                 if (recruiter === null) {
                     return res.json("User not found!");
                 }
@@ -118,7 +118,7 @@ module.exports = {
                             recruiter: true,
                             token: token
                         }
-                        
+
                         return res.json(req.session.recruiter);
                     }
                     return Promise.reject("Error: password is incorrect")
@@ -136,14 +136,5 @@ module.exports = {
             .then(data => res.json(data))
             .catch(err => res.json(err))
     },
-    // this function the recruiter can see all jobs posted by him 
-    // this simple ~ to get only the field written after ~ 
-    displayJobs: (req, res) => {
-        Recruiter.find({ _id: req.query._id }, '~ jobs ')
-            .then(data => res.json(data))
-            .catch(err => res.json(err))
-
-    }
-
 }
 
