@@ -95,6 +95,10 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
           View More information
         </button>
+        <a *ngIf="job.applied == undefined" class="btn btn-info" (click)="userApplied(job)">Apply</a>
+        <a *ngIf="job.applied" class="btn btn-success" (click)="userApplied(job)">Applied</a>
+        <a *ngIf="job.applied == false" class="btn btn-warning" (click)="userApplied(job)">You already applied for this
+          job</a>
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
           aria-hidden="true">
@@ -122,20 +126,14 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Apply</button>
+                <a *ngIf="job.applied == undefined" class="btn btn-info" (click)="userApplied(job)">Apply</a>
+                <a *ngIf="job.applied" class="btn btn-success" (click)="userApplied(job)">Applied</a>
+                <a *ngIf="job.applied == false" class="btn btn-warning" (click)="userApplied(job)">You already applied
+                  for this job</a>
               </div>
             </div>
           </div>
         </div>
-
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-          View More information
-        </button>
-
-        <a *ngIf="job.applied == undefined" class="btn btn-info" (click)="userApplied(job)">Apply</a>
-        <a *ngIf="job.applied" class="btn btn-success" (click)="userApplied(job)">Applied</a>
-        <a *ngIf="job.applied == false" class="btn btn-warning" (click)="userApplied(job)">You already applied for this
-          job</a>
       </div>
     </div>
     <!--End of job-->
