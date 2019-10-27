@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const Job = mongoose.model('Job');
 const Recruiter = mongoose.model('Recruiter');
 const JobSeeker = mongoose.model('JobSeeker');
+const nodemailer = require('nodemailer');
+
 
 module.exports = {
     getAll: (req, res) => {
