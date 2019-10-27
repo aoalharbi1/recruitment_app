@@ -10,7 +10,7 @@
                 <div class="row">
                     <div class="col-6 collapse-brand">
                         <a href="index.html">
-                            <img src="assets/img/brand/blue.png">
+                            <h4>Bright Future</h4>
                         </a>
                     </div>
                     <div class="col-6 collapse-close">
@@ -46,6 +46,7 @@
                         <a *ngIf="jobSeeker" class="dropdown-item" [routerLink]="['/editprofile']">View Profile</a>
                         <a *ngIf="recruiter" class="dropdown-item" [routerLink]="['/edit_recruiter']">View Profile</a>
                         <a *ngIf="recruiter" class="dropdown-item" [routerLink]="['/post_job']">Post Job</a>
+                        <a *ngIf="recruiter" class="dropdown-item" [routerLink]="['/ownjobs']">Display Posted Jobs</a>
                         <a *ngIf="admin" class="dropdown-item" [routerLink]="['/admin']">Admin Dashboard</a>
                         <a *ngIf="jobSeeker" class="dropdown-item" [routerLink]="['/displayjobs']">View jobs</a>
                         <div class="dropdown-divider"></div>
