@@ -95,7 +95,7 @@ module.exports = function (app) {
     });
     
     app.get('/recruiter/jobs', verifyToken, (req, res) => {
-        if (req.session.recruiter)
+        if (!req.session.recruiter)
             return res.status(401).send('Unauthorized request');
 
         recruiters.displayJobs(req, res);

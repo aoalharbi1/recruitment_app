@@ -119,7 +119,7 @@ module.exports = {
     },
 
     displayJobs: (req, res) => {
-        Job.find({ recruiter: req.session._id })
+        Job.find({ recruiter: req.session.recruiter._id })
             .then(data => res.json(data))
             .catch(err => res.json(err))
     },
