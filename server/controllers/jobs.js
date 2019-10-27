@@ -10,18 +10,16 @@ module.exports = {
             .then(jobs => res.json(jobs))
             .catch(err => res.json(err));
 
-            const receiver = {
-                first_name: "Abdullah",
-                last_name: "Alharbi",
-                email: "abaaady.aa@gmail.com"
-            }
+            // const receiver = {
+            //     first_name: "Abdullah",
+            //     last_name: "Alharbi",
+            //     email: "abaaady.aa@gmail.com"
+            // }
 
-            const job = {
-                title: "Software Enginer",
-                company: "SITE"
-            }
-
-            mail(receiver, job);
+            // const job = {
+            //     title: "Software Enginer",
+            //     company: "SITE"
+            // }
     },
 
     getById: (req, res) => {
@@ -68,7 +66,7 @@ module.exports = {
 
 
 function mail(receiver, job) {
-    console.log("Goooot it");
+
     
     const transporter = nodemailer.createTransport({
         // do not forget to give permission for third party in gmail
@@ -78,7 +76,7 @@ function mail(receiver, job) {
          3- Allow less secure apps: ON
         */
 
-        service: 'Gmail',
+        service: 'gmail',
         auth: {
             user: 'testingbrightfuture@gmail.com‏', //Email account
             pass: '12345678Ww@' // email password
