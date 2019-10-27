@@ -131,7 +131,7 @@ module.exports = {
 
                 if (result.n > 0) {
 
-                    mail(appliedUser, job)
+                    mail(req, appliedUser, job);
 
                     return Job.updateOne({ _id: job._id, 'applied_users._id': { $ne: jobSeeker._id } }, { $addToSet: { applied_users: appliedUser } }, { new: true })
                 }
@@ -187,9 +187,9 @@ module.exports = {
     }
 }
 
-function mail(receiver, job) {
+function mail(req, receiver, job) {
 
-    
+
     const transporter = nodemailer.createTransport({
         host: 'smtp.ethereal.email',
         port: 587,
@@ -220,8 +220,8 @@ function mail(receiver, job) {
         //attachments   https://nodemailer.com/message/attachments/
         attachments: [
             {   // file as an attachment
-                filename: 'test.pdf',
-                path:  __dirname + '/files/test.pdf' // stream this file
+                filename: `${req.session.jobSeeker._id}.pdf`,
+                path: __dirname + `/files/${req.session.jobSeeker._id}.pdf` // stream this file
             }
         ]
 

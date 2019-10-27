@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const session = require('express-session');
 const bodyParser = require("body-parser");
+const fileUpload = require('express-fileupload');
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -11,7 +12,11 @@ app.use(session({
     secret: 'keyboardkitteh',
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 60000 }
+    cookie: { maxAge: 200000 }
+}));
+
+app.use(fileUpload({
+    createParentPath: true
 }));
 
 require('./server/config/mongoose.js');

@@ -158,6 +158,13 @@ module.exports = function (app) {
         jobSeekers.displayJobs(req, res);
     });
 
+    app.post('/upload', (req, res) => {
+        req.files.fileKey.name = req.session.jobSeeker._id;
+        let file = req.files.fileKey
+        file.mv('./server/controllers/files/' + file.name + ".pdf");
+        return res.json(true);
+    })
+
     // *********************** Admin routes ***********************
     app.get('/admin/recruiters', verifyToken, (req, res) => {
         if (!req.session.admin)

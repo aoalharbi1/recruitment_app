@@ -44,11 +44,18 @@ export class HttpService {
     return this.http.put('/user', user);
   }
 
-  postNewJob(boy) {
-    return this.http.post('/job' , boy);
+  postNewJob(job) {
+    return this.http.post('/job', job);
   }
 
-  getRecJobs(){
+  getRecJobs() {
     return this.http.get('/recruiter/jobs');
+  }
+
+  postFile(fileToUpload: File) {
+    const endpoint = 'upload';
+    const formData: FormData = new FormData();
+    formData.append('fileKey', fileToUpload, fileToUpload.name);
+    return this.http.post(endpoint, formData);
   }
 }
