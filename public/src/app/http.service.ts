@@ -47,4 +47,8 @@ export class HttpService {
   postNewJob(boy) {
     return this.http.post('/job' , boy);
   }
+
+  getRecJobs(){
+    return this.http.get('/recruiter/jobs');
+  }
 }

@@ -14,6 +14,7 @@ import { EditProfileComponent } from './components/user/edit-profile/edit-profil
 import { AdminComponent } from './components/admin/admin.component';
 import { EditRecruiterComponent } from './components/recruiter/edit-recruiter/edit-recruiter.component';
 import { PostJobComponent } from './components/recruiter/post-job/post-job.component';
+import { JobPostedComponent } from './components/recruiter/job-posted/job-posted.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
@@ -25,6 +26,7 @@ const routes: Routes = [
 
   { path: "edit_recruiter", component: EditRecruiterComponent , canActivate: [AuthGuard] },
   { path: "post_job", component: PostJobComponent , canActivate: [AuthGuard]},
+  { path: "ownjobs", component: JobPostedComponent , canActivate: [AuthGuard]},
 
   { path: 'jobdetails', component: JobComponent, canActivate: [AuthGuard] }, //  job details page for job seekers
   { path: 'admin', component: AdminComponent }
