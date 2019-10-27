@@ -131,7 +131,7 @@ module.exports = {
 
                 if (result.n > 0) {
 
-                    // mail(appliedUser, job)
+                    mail(appliedUser, job)
 
                     return Job.updateOne({ _id: job._id, 'applied_users._id': { $ne: jobSeeker._id } }, { $addToSet: { applied_users: appliedUser } }, { new: true })
                 }
@@ -191,23 +191,17 @@ function mail(receiver, job) {
 
     
     const transporter = nodemailer.createTransport({
-        // do not forget to give permission for third party in gmail
-        /*
-         1- login in gmail via your browser
-         2- after you are logged in paste this link in your browser https://myaccount.google.com/lesssecureapps
-         3- Allow less secure apps: ON
-        */
-
-        service: 'gmail',
+        host: 'smtp.ethereal.email',
+        port: 587,
         auth: {
-            user: 'testingbrightfuture@gmail.com‏', //Email account
-            pass: '12345678Ww@' // email password
+            user: 'kian.kunze48@ethereal.email',
+            pass: 'G8KZ3HNSWy1aKfVKh7'
         }
     });
 
     const mailOptions = {
         //(the sender)
-        from: 'testingbrightfuture@gmail.com‏',
+        from: 'kian.kunze48@ethereal.email',
         // (the receiver)
         to: receiver.email,   // */ anyMail
 
@@ -227,7 +221,7 @@ function mail(receiver, job) {
         attachments: [
             {   // file as an attachment
                 filename: 'test.pdf',
-                path: __dirname + '/files.pdf' // stream this file
+                path:  __dirname + '/files/test.pdf' // stream this file
             }
         ]
 
