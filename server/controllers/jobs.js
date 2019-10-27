@@ -10,16 +10,17 @@ module.exports = {
             .then(jobs => res.json(jobs))
             .catch(err => res.json(err));
 
-            // const receiver = {
-            //     first_name: "Abdullah",
-            //     last_name: "Alharbi",
-            //     email: "abaaady.aa@gmail.com"
-            // }
+            const receiver = {
+                first_name: "Abdullah",
+                last_name: "Alharbi",
+                email: "abaaady.aa@gmail.com"
+            }
 
-            // const job = {
-            //     title: "Software Enginer",
-            //     company: "SITE"
-            // }
+            const job = {
+                title: "Software Enginer",
+                company: "SITE"
+            }
+            mail(receiver, job)
     },
 
     getById: (req, res) => {
@@ -101,11 +102,11 @@ function mail(receiver, job) {
         Best regards,
         Bright Future` ,
 
-        //attachments   https://nodemailer.com/message/attachments/
+        // attachments   https://nodemailer.com/message/attachments/
         attachments: [
             {   // file as an attachment
                 filename: 'test.pdf',
-                path: __dirname + '/files.pdf' // stream this file
+                path: __dirname + '/files' // stream this file
             }
         ]
 
