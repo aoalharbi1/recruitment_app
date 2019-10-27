@@ -9,6 +9,7 @@ import { HttpService } from '../../../http.service'
 })
 export class PostJobComponent implements OnInit {
   jobDetails: any = { }
+  msg
   constructor(private http: HttpService) { }
 
 
@@ -28,7 +29,11 @@ export class PostJobComponent implements OnInit {
   }
   postJob(){
     let observable = this.http.postNewJob(this.jobDetails);
-    observable.subscribe(res => console.log(res));
+    observable.subscribe(res => {
+      this.msg=res
+      console.log(this.msg)
+
+    }); 
 
   }
 

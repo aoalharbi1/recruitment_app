@@ -17,6 +17,7 @@ export class SearchComponent implements OnInit {
   City: any;
   lvl: any;
   field: any;
+  modal_info: any;
 
 
   constructor(
@@ -27,6 +28,7 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.modal_info = {}
     this.jobData = {
       _id: ""
     };
@@ -66,6 +68,14 @@ export class SearchComponent implements OnInit {
     this.searchText = word
     console.log(this.searchText)
   }
+
+  getModalInfo (job){
+    this.modal_info = job;
+    console.log(job);
+    
+  }
+
+  
 
 
 

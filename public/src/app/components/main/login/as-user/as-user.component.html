@@ -1,4 +1,9 @@
 <div class="card-body px-lg-5 py-lg-5">
+        <div class="alert alert-danger" role="alert" *ngIf="msgif">
+                
+                <span class="alert-inner--text"> <strong>{{msg}}</strong> </span>
+              </div>
+
     <h6>User</h6>
         <form role="form">
             <div class="form-group mb-3">
