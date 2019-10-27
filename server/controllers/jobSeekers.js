@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt');
 const Job = mongoose.model('Job');
 const passwordValidator = require('password-validator');
 const jwt = require('jsonwebtoken');
-const nodemailer = require('nodemailer');
 
 module.exports = {
     getAll: (req, res) => {
@@ -181,60 +180,5 @@ module.exports = {
         JobSeeker.findOne({ _id: id }, '~ jobs')
             .then(data => res.json(data.jobs)) // this will return the jobs only
             .catch(err => res.json(err));
-    },
-}
-
-function mail(receiver, job) {
-    const transporter = nodemailer.createTransport({
-        // do not forget to give permission for third party in gmail
-        /*
-         1- login in gmail via your browser
-         2- after you are logged in paste this link in your browser https://myaccount.google.com/lesssecureapps
-         3- Allow less secure apps: ON
-        */
-
-        service: 'gmail',
-        auth: {
-            user: 'testingbrightfuture@gmail.com‏', //Email account
-            pass: '12345678Ww@' // email password
-        }
-    });
-
-    const mailOptions = {
-        //(the sender)
-        from: 'testingbrightfuture@gmail.com‏',
-        // (the receiver)
-        to: receiver.email,   // */ anyMail
-
-        // titile
-        subject: `Applied to ${job.title}`,
-
-        //body message // for multi lines use this symbol ` `
-        text: `
-        Dear ${receiver.first_name} ${receiver.last_name},
-
-        Thank you for applying for ${job.title} posted by ${job.company}. We wish you the best of luck.
-
-        Best regards,
-        Bright Future` ,
-
-        //attachments   https://nodemailer.com/message/attachments/
-        attachments: [
-            {   // file as an attachment
-                filename: 'test.pdf',
-                path: __dirname + '/theFileName.pdf' // stream this file
-            }
-        ]
-
-    };
-
-    transporter.sendMail(mailOptions, (errorHappned, info) => {
-        if (errorHappned) {
-            console.log(errorHappned);
-        }
-        else {
-            console.log('Email sent: ' + info.response);
-        }
-
-    });
+    }
 }
