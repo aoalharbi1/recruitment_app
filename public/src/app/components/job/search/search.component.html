@@ -129,7 +129,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-                <a *ngIf="job.applied == undefined" class="btn btn-info" (click)="userApplied(job)">Apply</a>
+                
                 <a *ngIf="job.applied" class="btn btn-success" (click)="userApplied(job)">Applied</a>
                 <a *ngIf="job.applied == false" class="btn btn-warning" (click)="userApplied(job)">You already applied
                   for this job</a>
