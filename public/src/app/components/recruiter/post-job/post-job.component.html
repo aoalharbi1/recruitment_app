@@ -14,7 +14,7 @@
 
         <div class="input-group-prepend">
 
-          <span class="input-group-text"><i class="ni ni-single-02"></i></span>
+          <span class="input-group-text"><i class="ni ni-badge"></i></span>
 
         </div>
 
@@ -30,11 +30,11 @@
 
         <div class="input-group-prepend">
 
-          <span class="input-group-text"><i class="ni ni-single-02"></i></span>
+          <span class="input-group-text"><i class="ni ni-single-copy-04"></i></span>
 
         </div>
 
-        <textarea name="description" placeholder="Job description" cols="30" rows="10"
+        <textarea class="form-control" name="description" placeholder="Job description" cols="30" rows="10"
           [(ngModel)]="jobDetails.description"></textarea>
 
         <!-- <input class="form-control" placeholder="Job description" name="description" type="text"  > -->
@@ -49,7 +49,7 @@
 
         <div class="input-group-prepend">
 
-          <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+          <span class="input-group-text"><i class="ni ni-briefcase-24"></i></span>
 
         </div>
 
@@ -85,7 +85,7 @@
 
         <div class="input-group-prepend">
 
-          <span class="input-group-text"><i class="ni ni-building"></i></span>
+          <span class="input-group-text"><i class="ni ni-shop"></i></span>
 
         </div>
 
@@ -103,7 +103,7 @@
 
         <div class="input-group-prepend">
 
-          <span class="input-group-text"><i class="ni ni-world-2"></i></span>
+          <span class="input-group-text"><i class="ni ni-pin-3"></i></span>
 
         </div>
 
@@ -119,7 +119,7 @@
 
         <div class="input-group-prepend">
 
-          <span class="input-group-text"><i class="ni ni-world-2"></i></span>
+          <span class="input-group-text"><i class="ni ni-paper-diploma"></i></span>
 
         </div>
 
@@ -135,7 +135,7 @@
 
         <div class="input-group-prepend">
 
-          <span class="input-group-text"><i class="ni ni-world-2"></i></span>
+          <span class="input-group-text"><i class="ni ni-building"></i></span>
 
         </div>
 
@@ -146,7 +146,12 @@
     </div>
 
     <div class="text-center">
+        <div class="alert alert-success" role="alert" *ngIf="msg==true">
+                
+            <span class="alert-inner--text"> <strong>Job successfully posted</strong> </span>
+          </div>
 
+          
       <button type="button" class="btn btn-primary my-4" (click)='postJob()'>Post new job</button>
 
     </div>

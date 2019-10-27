@@ -11,6 +11,8 @@ import { InteractionService } from 'src/app/interaction.service';
 export class AsUserComponent implements OnInit {
 
   jobSeekerData: any = {};
+  msg:any
+  msgif:boolean=false
   constructor(
     private _auth: AuthService,
     private _router: Router,
@@ -31,6 +33,8 @@ export class AsUserComponent implements OnInit {
         res => {
 
           if (!res.token) {
+            this.msg=res
+            this.msgif=true
             console.log(res);
             return;
           }

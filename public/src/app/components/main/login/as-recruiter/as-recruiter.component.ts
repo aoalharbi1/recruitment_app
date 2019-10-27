@@ -12,6 +12,7 @@ import { InteractionService } from 'src/app/interaction.service';
 export class AsRecruiterComponent implements OnInit {
 
   recruiterData: any = {};
+  msg:any
   constructor(
     private _auth: AuthService,
     private _router: Router,
@@ -35,7 +36,9 @@ export class AsRecruiterComponent implements OnInit {
         res => {
 
           if (!res.token) {
-            console.log(res);
+            this.msg=res
+            console.log(this.msg);
+
             return;
           }
 
